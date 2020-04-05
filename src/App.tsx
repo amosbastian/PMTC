@@ -4,6 +4,7 @@ import Events from "./pages/Events";
 import Schedule from "./pages/Schedule";
 import Teams from "./pages/Teams";
 import Layout from "./components/Layout";
+import ThreadCreator from "./pages/ThreadCreator";
 
 function App() {
   return (
@@ -16,8 +17,11 @@ function App() {
           <Route path="/teams">
             <Teams />
           </Route>
-          <Route path="/">
+          <Route path="/schedule">
             <Schedule />
+          </Route>
+          <Route path="/">
+            <ThreadCreator />
           </Route>
         </Switch>
       </Layout>

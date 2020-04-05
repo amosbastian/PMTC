@@ -1,5 +1,9 @@
 export const ROUTES = [
   {
+    name: "PMTC",
+    to: "/pmtc",
+  },
+  {
     name: "Schedule",
     to: "/schedule",
   },
