@@ -32,9 +32,6 @@ interface GameInputProps {
 const GameInput: React.FC<GameInputProps> = ({ game }) => {
   return (
     <GameInputSection>
-      <GameInputHeader>
-        <h2>{`Game ${game}`}</h2>
-      </GameInputHeader>
       <TeamsInput />
       <BansInput />
       <PicksInput />
