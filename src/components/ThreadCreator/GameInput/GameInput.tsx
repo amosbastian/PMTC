@@ -22,6 +22,7 @@ const GameInputHeader = styled.header`
 const GameInputFooter = styled.footer`
   display: grid;
   gap: 1rem;
+  padding: 0 1rem;
 `;
 
 interface GameInputProps {

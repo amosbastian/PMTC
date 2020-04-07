@@ -7,6 +7,7 @@ const PlayersInputSection = styled.section`
   display: grid;
   grid-template-columns: 1fr max-content 6rem;
   gap: 1rem;
+  padding: 0 1rem;
 `;
 
 const PlayersInputHeader = styled.header`

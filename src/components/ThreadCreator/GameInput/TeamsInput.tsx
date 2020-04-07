@@ -6,6 +6,7 @@ const TeamsInputSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  padding: 0 1rem;
 `;
 
 const TeamsInput: React.FC = () => {

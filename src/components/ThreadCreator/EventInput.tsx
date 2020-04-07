@@ -6,6 +6,7 @@ import Select from "../Select";
 const EventInputContainer = styled.div`
   display: grid;
   gap: 1rem;
+  padding: 0 1rem;
   grid-template-areas:
     "event"
     "lolesports"

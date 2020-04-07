@@ -5,6 +5,7 @@ import styled from "styled-components";
 const BansInputSection = styled.div`
   display: grid;
   gap: 1rem;
+  padding: 0 1rem;
 `;
 
 const BansInput: React.FC = () => {

@@ -6,6 +6,7 @@ import GameTabs from "../components/ThreadCreator/GameTabs";
 const ThreadCreatorSection = styled.section`
   display: grid;
   gap: 1rem;
+  padding: 2rem 0;
 `;
 
 const ThreadCreator: React.FC = () => {

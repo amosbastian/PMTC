@@ -34,7 +34,7 @@ const TextInputContainer = styled.div`
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  label: string;
+  label?: string;
 }
 
 const TextInput: React.FC<TextInputProps> = ({ className, id, label, ...rest }) => {
