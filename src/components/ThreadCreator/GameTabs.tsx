@@ -30,11 +30,11 @@ const GameTabs: React.FC = () => {
         ))}
       </Tabs>
       <SwipeableViews index={view} onChangeIndex={onChangeHandler}>
+        <GameInput game={0} />
         <GameInput game={1} />
         <GameInput game={2} />
         <GameInput game={3} />
         <GameInput game={4} />
-        <GameInput game={5} />
       </SwipeableViews>
     </>
   );
