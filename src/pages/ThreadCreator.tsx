@@ -1,19 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import EventInput from "../components/ThreadCreator/EventInput";
-import GameTabs from "../components/ThreadCreator/GameTabs";
+import ThreadCreatorForm from "../components/ThreadCreator/ThreadCreatorForm";
 
 const ThreadCreatorSection = styled.section`
   display: grid;
   gap: 1rem;
-  padding: 2rem 0;
 `;
 
 const ThreadCreator: React.FC = () => {
   return (
     <ThreadCreatorSection>
-      <EventInput />
-      <GameTabs />
+      <ThreadCreatorForm />
     </ThreadCreatorSection>
   );
 };
