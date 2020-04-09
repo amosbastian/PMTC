@@ -6,6 +6,7 @@ import BansInput from "./BansInput";
 import TeamsInput from "./TeamsInput";
 import PicksInput from "./PicksInput";
 import PlayersInput from "./PlayersInput";
+import { Field } from "formik";
 
 const GameInputSection = styled.section`
   display: grid;
@@ -32,18 +33,39 @@ interface GameInputProps {
 const GameInput: React.FC<GameInputProps> = ({ game }) => {
   return (
     <GameInputSection>
-      <TeamsInput />
-      <BansInput />
-      <PicksInput />
-      <PlayersInput team={1} />
-      <PlayersInput team={2} />
+      <TeamsInput game={game} />
+      <BansInput game={game} />
+      <PicksInput game={game} />
+      <PlayersInput game={game} team={1} />
+      <PlayersInput game={game} team={2} />
       <GameInputFooter>
-        <Select id="winner" label="Winner" />
-        <TextInput id="time" label="Time" placeholder="30" />
-        <TextInput id="screenshot" label="Screenshot" placeholder="https//imgur.com/..." />
-        <TextInput id="matchHistory" label="Match history" placeholder="..." />
-        <TextInput id="breakdown" label="Breakdown" placeholder="..." />
-        <TextInput id="context" label="Context" placeholder="..." />
+        <Field
+          id="winner"
+          name={`games[${game}].winner`}
+          component={Select}
+          label="Winner"
+          options={[
+            { label: "TSM", value: "TSM" },
+            { label: "CLG", value: "CLG" },
+          ]}
+        />
+        <Field id="time" name={`games[${game}].time`} as={TextInput} label="Time" />
+        <Field
+          id="screenshot"
+          name={`games[${game}].screenshot`}
+          as={TextInput}
+          label="Screenshot"
+          placeholder="https//imgur.com/..."
+        />
+        <Field
+          id="matchHistory"
+          name={`games[${game}].matchHistory`}
+          as={TextInput}
+          label="Match history"
+          placeholder="..."
+        />
+        <Field id="breakdown" name={`games[${game}].breakdown`} as={TextInput} label="Breakdown" placeholder="..." />
+        <Field id="context" name={`games[${game}].context`} as={TextInput} label="Context" placeholder="..." />
       </GameInputFooter>
     </GameInputSection>
   );

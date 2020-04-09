@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TextInput from "../TextInput";
 import Select from "../Select";
+import { Field } from "formik";
 
 const EventInputContainer = styled.div`
   display: grid;
@@ -19,7 +20,7 @@ const EventInputContainer = styled.div`
   }
 
   #lolesports {
-    grid-area: lolesports;
+    grid-area: lolEsports;
   }
 
   #gamepedia {
@@ -38,11 +39,38 @@ const EventInputContainer = styled.div`
 const EventInput: React.FC = () => {
   return (
     <EventInputContainer>
-      <Select id="event" label="Event" />
-      <TextInput id="lolesports" label="LoL eSports" placeholder="https://eu.lolesports.com/en/league/..." />
-      <TextInput id="gamepedia" label="Gamepedia" placeholder="https://lol.gamepedia.com/..." />
-      <TextInput id="liquipedia" label="Liquipedia" placeholder="http://liquipedia.net/leagueoflegends/..." />
-      <TextInput id="context" label="Context" placeholder="..." />
+      <Field
+        id="event"
+        name="event"
+        component={Select}
+        label="Event"
+        options={[
+          { label: "LEC", value: "LEC" },
+          { label: "LCS", value: "LCS" },
+        ]}
+      />
+      <Field
+        id="lolEsports"
+        name="lolEsports"
+        as={TextInput}
+        label="LoL eSports"
+        placeholder="https://eu.lolesports.com/en/league/..."
+      />
+      <Field
+        id="gamepedia"
+        name="gamepedia"
+        as={TextInput}
+        label="Gamepedia"
+        placeholder="https://lol.gamepedia.com/..."
+      />
+      <Field
+        id="liquipedia"
+        name="liquipedia"
+        as={TextInput}
+        label="Liquipedia"
+        placeholder="http://liquipedia.net/leagueoflegends/..."
+      />
+      <Field id="context" name="context" as={TextInput} label="Context" placeholder="..." />
     </EventInputContainer>
   );
 };

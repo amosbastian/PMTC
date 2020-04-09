@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "../../Select";
 import styled from "styled-components";
+import { Field } from "formik";
 
 const TeamsInputSection = styled.div`
   display: grid;
@@ -9,11 +10,33 @@ const TeamsInputSection = styled.div`
   padding: 0 1rem;
 `;
 
-const TeamsInput: React.FC = () => {
+interface TeamsInputProps {
+  game: number;
+}
+
+const TeamsInput: React.FC<TeamsInputProps> = ({ game }) => {
   return (
     <TeamsInputSection>
-      <Select id="team1" label="Team 1" />
-      <Select id="team2" label="Team 2" />
+      <Field
+        id="team1"
+        name={`games[${game}].team1.players`}
+        component={Select}
+        label="Team 1"
+        options={[
+          { label: "TSM", value: "TSM" },
+          { label: "CLG", value: "CLG" },
+        ]}
+      />
+      <Field
+        id="team2"
+        name={`games[${game}].team2.players`}
+        component={Select}
+        label="Team 2"
+        options={[
+          { label: "TSM", value: "TSM" },
+          { label: "CLG", value: "CLG" },
+        ]}
+      />
     </TeamsInputSection>
   );
 };
