@@ -7,6 +7,7 @@ import { gql } from "apollo-boost";
 import { ThreadCreatorFormValues } from "../types";
 import { useQuery } from "@apollo/react-hooks";
 import { PlayersInputPlayerData, PLAYERS_INPUT_PLAYER_FRAGMENT } from "./fragments";
+import { TeamPlayersQuery } from "../../../generated/graphql";
 
 const PlayersInputSection = styled.section`
   display: grid;
@@ -29,12 +30,6 @@ interface TeamPlayersVariables {
   teamId: number;
 }
 
-interface TeamPlayersData {
-  playerTeam: Array<{
-    player: PlayersInputPlayerData;
-  }>;
-}
-
 const TEAM_PLAYERS = gql`
   query teamPlayers($teamId: Int) {
     playerTeam(where: { teamId: { _eq: $teamId } }) {
@@ -54,7 +49,7 @@ interface PlayersInputProps {
 const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
   const { setFieldValue, values } = useFormikContext<ThreadCreatorFormValues>();
 
-  const { data } = useQuery<TeamPlayersData, TeamPlayersVariables>(TEAM_PLAYERS, {
+  const { data } = useQuery<TeamPlayersQuery, TeamPlayersVariables>(TEAM_PLAYERS, {
     skip: values.games[game].teams[team].id === undefined,
     variables: {
       teamId: values.games[game].teams[team].id!,
