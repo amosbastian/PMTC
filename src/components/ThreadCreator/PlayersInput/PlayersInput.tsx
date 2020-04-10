@@ -67,11 +67,11 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
         .map(({ player }) => player)
         .sort((playerA, playerB) => Number(playerA.starter) - Number(playerB.starter))
         .reverse();
-      setFieldValue(`games[${game}].teams[${team}].player1`, playersByRoleId(players, "top")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].player2`, playersByRoleId(players, "jng")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].player3`, playersByRoleId(players, "mid")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].player4`, playersByRoleId(players, "bot")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].player5`, playersByRoleId(players, "sup")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[0]`, playersByRoleId(players, "top")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[1]`, playersByRoleId(players, "jng")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[2]`, playersByRoleId(players, "mid")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[3]`, playersByRoleId(players, "bot")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[4]`, playersByRoleId(players, "sup")[0].name);
     },
   });
 
@@ -89,19 +89,19 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       <PlayersInputHeader>
         <h3>{`Team ${team + 1}`}</h3>
       </PlayersInputHeader>
-      <Field id="player1" name={`games[${game}].teams[${team}].player1`} component={Select} options={topPlayers} />
+      <Field id="player1" name={`games[${game}].teams[${team}].players[0]`} component={Select} options={topPlayers} />
       <p>A</p>
       <TextInput id="time" placeholder="0-0-0" />
-      <Field id="player2" name={`games[${game}].teams[${team}].player2`} component={Select} options={jngPlayers} />
+      <Field id="player2" name={`games[${game}].teams[${team}].players[1]`} component={Select} options={jngPlayers} />
       <p>B</p>
       <TextInput id="time" placeholder="0-0-0" />
-      <Field id="player3" name={`games[${game}].teams[${team}].player3`} component={Select} options={midPlayers} />
+      <Field id="player3" name={`games[${game}].teams[${team}].players[2]`} component={Select} options={midPlayers} />
       <p>C</p>
       <TextInput id="time" placeholder="0-0-0" />
-      <Field id="player4" name={`games[${game}].teams[${team}].player4`} component={Select} options={botPlayers} />
+      <Field id="player4" name={`games[${game}].teams[${team}].players[3]`} component={Select} options={botPlayers} />
       <p>D</p>
       <TextInput id="time" placeholder="0-0-0" />
-      <Field id="player5" name={`games[${game}].teams[${team}].player5`} component={Select} options={supPlayers} />
+      <Field id="player5" name={`games[${game}].teams[${team}].players[4]`} component={Select} options={supPlayers} />
       <p>E</p>
       <TextInput id="time" placeholder="0-0-0" />
     </PlayersInputSection>
