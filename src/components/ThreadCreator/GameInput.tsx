@@ -3,10 +3,11 @@ import Select from "../Select";
 import TextInput from "../TextInput";
 import styled from "styled-components";
 import BansInput from "./BansInput";
-import TeamsInput from "./TeamsInput";
+import TeamsInput from "./TeamsInput/TeamsInput";
 import PicksInput from "./PicksInput";
 import PlayersInput from "./PlayersInput";
 import { FastField } from "formik";
+import { TeamsInputTeamsData } from "./TeamsInput/fragments";
 
 const GameInputSection = styled.section`
   display: grid;
@@ -21,12 +22,13 @@ const GameInputFooter = styled.footer`
 
 interface GameInputProps {
   game: number;
+  teams: TeamsInputTeamsData[];
 }
 
-const GameInput: React.FC<GameInputProps> = React.memo(({ game }) => {
+const GameInput: React.FC<GameInputProps> = React.memo(({ game, teams }) => {
   return (
     <GameInputSection>
-      <TeamsInput game={game} />
+      <TeamsInput game={game} teams={teams} />
       <BansInput game={game} />
       <PicksInput game={game} />
       <PlayersInput game={game} team={1} />
