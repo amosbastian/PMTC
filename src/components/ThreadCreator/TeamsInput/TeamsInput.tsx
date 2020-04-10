@@ -1,8 +1,9 @@
 import React from "react";
 import Select from "../../Select";
 import styled from "styled-components";
-import { FastField } from "formik";
+import { Field, useFormikContext } from "formik";
 import { TeamsInputTeamsData } from "./fragments";
+import { ThreadCreatorFormValues } from "../types";
 
 const TeamsInputSection = styled.div`
   display: grid;
@@ -17,12 +18,19 @@ interface TeamsInputProps {
 }
 
 const TeamsInput: React.FC<TeamsInputProps> = ({ game, teams }) => {
-  const options = teams.map((team) => ({ label: team.name, value: team.id }));
+  const { values } = useFormikContext<ThreadCreatorFormValues>();
+
+  const team1Id = values.games[game].teams[0].id;
+  const team2Id = values.games[game].teams[1].id;
+
+  const teamOptions = teams
+    .filter((team) => team.id !== team1Id && team.id !== team2Id)
+    .map((team) => ({ label: team.name, value: team.id }));
 
   return (
     <TeamsInputSection>
-      <FastField id="team1" name={`games[${game}].teams[0].id`} component={Select} label="Team 1" options={options} />
-      <FastField id="team2" name={`games[${game}].teams[1].id`} component={Select} label="Team 2" options={options} />
+      <Field id="team1" name={`games[${game}].teams[0].id`} component={Select} label="Team 1" options={teamOptions} />
+      <Field id="team2" name={`games[${game}].teams[1].id`} component={Select} label="Team 2" options={teamOptions} />
     </TeamsInputSection>
   );
 };

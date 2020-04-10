@@ -1,6 +1,4 @@
 import React from "react";
-import Select from "../Select";
-import TextInput from "../TextInput";
 import styled from "styled-components";
 import BansInput from "./BansInput";
 import TeamsInput from "./TeamsInput/TeamsInput";
