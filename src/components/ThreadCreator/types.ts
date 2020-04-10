@@ -26,6 +26,6 @@ export interface ThreadCreatorFormValues {
   gamepedia: string;
   liquipedia: string;
   context: string;
-  event: string[];
+  event?: number;
   games: GameFormValues[];
 }

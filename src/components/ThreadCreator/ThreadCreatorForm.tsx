@@ -45,7 +45,7 @@ const initialValues: ThreadCreatorFormValues = {
   gamepedia: "",
   liquipedia: "",
   context: "",
-  event: [],
+  event: undefined,
   games: [game, game, game, game, game],
 };
 

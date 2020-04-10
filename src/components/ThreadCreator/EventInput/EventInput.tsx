@@ -43,7 +43,7 @@ interface EventInputProps {
 }
 
 const EventInput: React.FC<EventInputProps> = ({ events }) => {
-  const options = events.map((event) => ({ ...event, label: event.name, value: event.name }));
+  const options = events.map((event) => ({ ...event, label: event.name, value: event.id }));
   const { setFieldValue } = useFormikContext<ThreadCreatorFormValues>();
 
   const onChange = (option: any) => {
