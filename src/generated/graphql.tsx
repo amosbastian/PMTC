@@ -2547,6 +2547,48 @@ export type EventInputEventFragmentFragment = (
   & Pick<Events, 'id' | 'gamepedia' | 'liquipedia' | 'lolEsports' | 'name'>
 );
 
+export type AnotherTestQueryQueryVariables = {
+  eventId?: Maybe<Scalars['Int']>;
+};
+
+
+export type AnotherTestQueryQuery = (
+  { __typename?: 'query_root' }
+  & { eventTeam: Array<(
+    { __typename?: 'eventTeam' }
+    & { team: (
+      { __typename?: 'teams' }
+      & Pick<Teams, 'id' | 'name'>
+    ) }
+  )> }
+);
+
+export type TeamPlayersQueryVariables = {
+  teamId?: Maybe<Scalars['Int']>;
+};
+
+
+export type TeamPlayersQuery = (
+  { __typename?: 'query_root' }
+  & { playerTeam: Array<(
+    { __typename?: 'playerTeam' }
+    & { player: (
+      { __typename?: 'players' }
+      & PlayersInputPlayerFragmentFragment
+    ) }
+  )> }
+);
+
+export type PlayersInputPlayerFragmentFragment = (
+  { __typename?: 'players' }
+  & Pick<Players, 'id' | 'name' | 'roleId' | 'starter'>
+);
+
+export type TeamsInputTeamsFragmentFragment = (
+  { __typename?: 'teams' }
+  & Pick<Teams, 'id' | 'name'>
+);
+
 export type TestQueryQueryVariables = {
   date?: Maybe<Scalars['date']>;
 };
@@ -2570,6 +2612,91 @@ export const EventInputEventFragmentFragmentDoc = gql`
   name
 }
     `;
+export const PlayersInputPlayerFragmentFragmentDoc = gql`
+    fragment playersInputPlayerFragment on players {
+  id
+  name
+  roleId
+  starter
+}
+    `;
+export const TeamsInputTeamsFragmentFragmentDoc = gql`
+    fragment teamsInputTeamsFragment on teams {
+  id
+  name
+}
+    `;
+export const AnotherTestQueryDocument = gql`
+    query anotherTestQuery($eventId: Int) {
+  eventTeam(where: {eventId: {_eq: $eventId}}) {
+    team {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useAnotherTestQueryQuery__
+ *
+ * To run a query within a React component, call `useAnotherTestQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAnotherTestQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAnotherTestQueryQuery({
+ *   variables: {
+ *      eventId: // value for 'eventId'
+ *   },
+ * });
+ */
+export function useAnotherTestQueryQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AnotherTestQueryQuery, AnotherTestQueryQueryVariables>) {
+        return ApolloReactHooks.useQuery<AnotherTestQueryQuery, AnotherTestQueryQueryVariables>(AnotherTestQueryDocument, baseOptions);
+      }
+export function useAnotherTestQueryLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AnotherTestQueryQuery, AnotherTestQueryQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<AnotherTestQueryQuery, AnotherTestQueryQueryVariables>(AnotherTestQueryDocument, baseOptions);
+        }
+export type AnotherTestQueryQueryHookResult = ReturnType<typeof useAnotherTestQueryQuery>;
+export type AnotherTestQueryLazyQueryHookResult = ReturnType<typeof useAnotherTestQueryLazyQuery>;
+export type AnotherTestQueryQueryResult = ApolloReactCommon.QueryResult<AnotherTestQueryQuery, AnotherTestQueryQueryVariables>;
+export const TeamPlayersDocument = gql`
+    query teamPlayers($teamId: Int) {
+  playerTeam(where: {teamId: {_eq: $teamId}}) {
+    player {
+      ...playersInputPlayerFragment
+    }
+  }
+}
+    ${PlayersInputPlayerFragmentFragmentDoc}`;
+
+/**
+ * __useTeamPlayersQuery__
+ *
+ * To run a query within a React component, call `useTeamPlayersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeamPlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeamPlayersQuery({
+ *   variables: {
+ *      teamId: // value for 'teamId'
+ *   },
+ * });
+ */
+export function useTeamPlayersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TeamPlayersQuery, TeamPlayersQueryVariables>) {
+        return ApolloReactHooks.useQuery<TeamPlayersQuery, TeamPlayersQueryVariables>(TeamPlayersDocument, baseOptions);
+      }
+export function useTeamPlayersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TeamPlayersQuery, TeamPlayersQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TeamPlayersQuery, TeamPlayersQueryVariables>(TeamPlayersDocument, baseOptions);
+        }
+export type TeamPlayersQueryHookResult = ReturnType<typeof useTeamPlayersQuery>;
+export type TeamPlayersLazyQueryHookResult = ReturnType<typeof useTeamPlayersLazyQuery>;
+export type TeamPlayersQueryResult = ApolloReactCommon.QueryResult<TeamPlayersQuery, TeamPlayersQueryVariables>;
 export const TestQueryDocument = gql`
     query testQuery($date: date) {
   events(where: {scheduleEnd: {_gte: $date}}) {
