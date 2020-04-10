@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Formik } from "formik";
-import EventInput from "./EventInput";
+import EventInput from "./EventInput/EventInput";
 import { ThreadCreatorFormValues } from "./types";
 import GameTabs from "./GameTabs";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 
 const game = {
   team1: {
@@ -52,12 +54,34 @@ const Form = styled.form`
   max-width: 100vw;
 `;
 
+const TEST_QUERY = gql`
+  query {
+    events(where: { scheduleEnd: { _gte: "2020-04-10" } }) {
+      id
+      name
+      lolEsports
+      gamepedia
+      liquipedia
+    }
+  }
+`;
+
 const ThreadCreatorForm: React.FC = () => {
+  const { data, loading, error } = useQuery(TEST_QUERY);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
+
   return (
     <Formik initialValues={initialValues} onSubmit={(data) => console.log(data)}>
       {() => (
         <Form>
-          <EventInput />
+          <EventInput events={data.events} />
           <GameTabs />
         </Form>
       )}
