@@ -47,6 +47,8 @@ const initialValues: ThreadCreatorFormValues = {
 };
 
 const Form = styled.form`
+  display: grid;
+  gap: 1rem;
   max-width: 100vw;
 `;
 

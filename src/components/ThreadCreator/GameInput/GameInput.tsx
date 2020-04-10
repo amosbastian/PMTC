@@ -13,13 +13,6 @@ const GameInputSection = styled.section`
   gap: 1rem;
 `;
 
-const GameInputHeader = styled.header`
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  background-color: grey;
-`;
-
 const GameInputFooter = styled.footer`
   display: grid;
   gap: 1rem;
@@ -30,7 +23,7 @@ interface GameInputProps {
   game: number;
 }
 
-const GameInput: React.FC<GameInputProps> = ({ game }) => {
+const GameInput: React.FC<GameInputProps> = React.memo(({ game }) => {
   return (
     <GameInputSection>
       <TeamsInput game={game} />
@@ -69,6 +62,6 @@ const GameInput: React.FC<GameInputProps> = ({ game }) => {
       </GameInputFooter>
     </GameInputSection>
   );
-};
+});
 
 export default GameInput;

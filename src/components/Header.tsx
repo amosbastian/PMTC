@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Container from "./Container";
-import { MdMenu } from "react-icons/md";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES } from "../constants";
