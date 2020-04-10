@@ -6,7 +6,7 @@ import { ThreadCreatorFormValues } from "./types";
 import GameTabs from "./GameTabs";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-import { EVENT_INPUT_EVENT_FRAGMENT } from "./EventInput/fragments";
+import { EVENT_INPUT_EVENT_FRAGMENT, EventInputEventData } from "./EventInput/fragments";
 
 const game = {
   team1: {
@@ -55,9 +55,17 @@ const Form = styled.form`
   max-width: 100vw;
 `;
 
+interface TestQueryVariables {
+  date: string;
+}
+
+interface TestQueryData {
+  events: Array<EventInputEventData>;
+}
+
 const TEST_QUERY = gql`
-  query {
-    events(where: { scheduleEnd: { _gte: "2020-04-10" } }) {
+  query testQuery($date: date) {
+    events(where: { scheduleEnd: { _gte: $date } }) {
       id
       ...eventInputEventFragment
     }
@@ -66,7 +74,11 @@ const TEST_QUERY = gql`
 `;
 
 const ThreadCreatorForm: React.FC = () => {
-  const { data, loading, error } = useQuery(TEST_QUERY);
+  const { data, loading, error } = useQuery<TestQueryData, TestQueryVariables>(TEST_QUERY, {
+    variables: {
+      date: new Date().toISOString().slice(0, 10),
+    },
+  });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -80,7 +92,7 @@ const ThreadCreatorForm: React.FC = () => {
     <Formik initialValues={initialValues} onSubmit={(data) => console.log(data)}>
       {() => (
         <Form>
-          <EventInput events={data.events} />
+          <EventInput events={data!.events} />
           <GameTabs />
         </Form>
       )}
