@@ -6,6 +6,7 @@ import { ThreadCreatorFormValues } from "./types";
 import GameTabs from "./GameTabs";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import { EVENT_INPUT_EVENT_FRAGMENT } from "./EventInput/fragments";
 
 const game = {
   team1: {
@@ -58,12 +59,10 @@ const TEST_QUERY = gql`
   query {
     events(where: { scheduleEnd: { _gte: "2020-04-10" } }) {
       id
-      name
-      lolEsports
-      gamepedia
-      liquipedia
+      ...eventInputEventFragment
     }
   }
+  ${EVENT_INPUT_EVENT_FRAGMENT}
 `;
 
 const ThreadCreatorForm: React.FC = () => {

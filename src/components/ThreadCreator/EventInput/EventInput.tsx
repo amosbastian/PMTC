@@ -4,6 +4,7 @@ import TextInput from "../../TextInput";
 import Select from "../../Select";
 import { Field, useFormikContext } from "formik";
 import { ThreadCreatorFormValues } from "../types";
+import { EventInputEventData } from "./fragments";
 
 const EventInputContainer = styled.div`
   display: grid;
@@ -38,17 +39,11 @@ const EventInputContainer = styled.div`
 `;
 
 interface EventInputProps {
-  events: Array<{
-    id: number;
-    name: string;
-    lolEsports: string;
-    liquipedia: string;
-    gamepedia: string;
-  }>;
+  events: Array<EventInputEventData>;
 }
 
 const EventInput: React.FC<EventInputProps> = ({ events }) => {
-  const options = events.map((event) => ({ ...event, label: event.name, value: event.id }));
+  const options = events.map((event) => ({ ...event, label: event.name, value: event.name }));
   const { setFieldValue } = useFormikContext<ThreadCreatorFormValues>();
 
   const onChange = (option: any) => {

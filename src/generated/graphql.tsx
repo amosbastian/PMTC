@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import gql from "graphql-tag";
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -2470,8 +2469,22 @@ export type Teams_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type EventInputEventFragmentFragment = { __typename?: "events" } & Pick<
+  Events,
+  "gamepedia" | "liquipedia" | "lolEsports" | "name"
+>;
+
 export type Unnamed_1_QueryVariables = {};
 
 export type Unnamed_1_Query = { __typename?: "query_root" } & {
-  events: Array<{ __typename?: "events" } & Pick<Events, "id" | "name" | "lolEsports" | "gamepedia" | "liquipedia">>;
+  events: Array<{ __typename?: "events" } & Pick<Events, "id"> & EventInputEventFragmentFragment>;
 };
+
+export const EventInputEventFragmentFragmentDoc = gql`
+  fragment eventInputEventFragment on events {
+    gamepedia
+    liquipedia
+    lolEsports
+    name
+  }
+`;
