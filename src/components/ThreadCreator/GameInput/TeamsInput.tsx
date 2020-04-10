@@ -19,7 +19,7 @@ const TeamsInput: React.FC<TeamsInputProps> = ({ game }) => {
     <TeamsInputSection>
       <Field
         id="team1"
-        name={`games[${game}].team1.players`}
+        name={`games[${game}].team1.name`}
         component={Select}
         label="Team 1"
         options={[
@@ -29,7 +29,7 @@ const TeamsInput: React.FC<TeamsInputProps> = ({ game }) => {
       />
       <Field
         id="team2"
-        name={`games[${game}].team2.players`}
+        name={`games[${game}].team2.name`}
         component={Select}
         label="Team 2"
         options={[

@@ -2,7 +2,11 @@ interface TeamFormValues {
   name: string;
   bans: string[];
   picks: string[];
-  players: string[];
+  player1: string;
+  player2: string;
+  player3: string;
+  player4: string;
+  player5: string;
   gold: string;
   towers: string;
 }

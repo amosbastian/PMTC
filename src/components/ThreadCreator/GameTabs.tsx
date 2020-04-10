@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GameInput from "./GameInput/GameInput";
 import SwipeableViews, { OnChangeIndexCallback } from "react-swipeable-views";
 import GameTab from "./GameTab";
+import ThreadOutput from "./ThreadOutput";
 
 const TABS = ["1", "2", "3", "4", "5", "Output"];
 
@@ -35,6 +36,7 @@ const GameTabs: React.FC = () => {
         <GameInput game={2} />
         <GameInput game={3} />
         <GameInput game={4} />
+        <ThreadOutput />
       </SwipeableViews>
     </>
   );

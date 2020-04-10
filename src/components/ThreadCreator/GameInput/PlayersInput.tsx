@@ -28,7 +28,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       </PlayersInputHeader>
       <Field
         id="player1"
-        name={`games[${game}].team${team}.name`}
+        name={`games[${game}].team${team}.player1`}
         component={Select}
         options={[
           { label: "TSM", value: "TSM" },
@@ -39,7 +39,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       <TextInput id="time" placeholder="0-0-0" />
       <Field
         id="player2"
-        name={`games[${game}].team${team}.name`}
+        name={`games[${game}].team${team}.player2`}
         component={Select}
         options={[
           { label: "TSM", value: "TSM" },
@@ -50,7 +50,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       <TextInput id="time" placeholder="0-0-0" />
       <Field
         id="player3"
-        name={`games[${game}].team${team}.name`}
+        name={`games[${game}].team${team}.player3`}
         component={Select}
         options={[
           { label: "TSM", value: "TSM" },
@@ -61,7 +61,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       <TextInput id="time" placeholder="0-0-0" />
       <Field
         id="player4"
-        name={`games[${game}].team${team}.name`}
+        name={`games[${game}].team${team}.player4`}
         component={Select}
         options={[
           { label: "TSM", value: "TSM" },
@@ -72,7 +72,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
       <TextInput id="time" placeholder="0-0-0" />
       <Field
         id="player5"
-        name={`games[${game}].team${team}.name`}
+        name={`games[${game}].team${team}.player5`}
         component={Select}
         options={[
           { label: "TSM", value: "TSM" },

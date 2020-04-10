@@ -25,6 +25,7 @@ const BansInput: React.FC<BansInputProps> = ({ game }) => {
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
+        isMulti
       />
       <Field
         id="bans2"
@@ -35,6 +36,7 @@ const BansInput: React.FC<BansInputProps> = ({ game }) => {
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
+        isMulti
       />
     </BansInputSection>
   );

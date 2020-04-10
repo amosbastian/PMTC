@@ -25,6 +25,7 @@ const PicksInput: React.FC<PicksInputProps> = ({ game }) => {
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
+        isMulti
       />
       <Field
         id="picks2"
@@ -35,6 +36,7 @@ const PicksInput: React.FC<PicksInputProps> = ({ game }) => {
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
+        isMulti
       />
     </PicksInputSection>
   );
