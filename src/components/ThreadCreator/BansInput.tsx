@@ -1,45 +1,45 @@
 import React from "react";
-import Select from "../../Select";
+import Select from "../Select";
 import styled from "styled-components";
-import { Field } from "formik";
+import { FastField } from "formik";
 
-const PicksInputSection = styled.div`
+const BansInputSection = styled.div`
   display: grid;
   gap: 1rem;
   padding: 0 1rem;
 `;
 
-interface PicksInputProps {
+interface BansInputProps {
   game: number;
 }
 
-const PicksInput: React.FC<PicksInputProps> = ({ game }) => {
+const BansInput: React.FC<BansInputProps> = ({ game }) => {
   return (
-    <PicksInputSection>
-      <Field
-        id="picks1"
-        name={`games[${game}].team1.picks`}
+    <BansInputSection>
+      <FastField
+        id="bans1"
+        name={`games[${game}].team1.bans`}
         component={Select}
-        label="Picks team 1"
+        label="Bans team 1"
         options={[
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
         isMulti
       />
-      <Field
-        id="picks2"
-        name={`games[${game}].team2.picks`}
+      <FastField
+        id="bans2"
+        name={`games[${game}].team2.bans`}
         component={Select}
-        label="Picks team 2"
+        label="Bans team 2"
         options={[
           { label: "TSM", value: "TSM" },
           { label: "CLG", value: "CLG" },
         ]}
         isMulti
       />
-    </PicksInputSection>
+    </BansInputSection>
   );
 };
 
-export default PicksInput;
+export default BansInput;

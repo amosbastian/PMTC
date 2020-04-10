@@ -1,12 +1,12 @@
 import React from "react";
-import Select from "../../Select";
-import TextInput from "../../TextInput";
+import Select from "../Select";
+import TextInput from "../TextInput";
 import styled from "styled-components";
 import BansInput from "./BansInput";
 import TeamsInput from "./TeamsInput";
 import PicksInput from "./PicksInput";
 import PlayersInput from "./PlayersInput";
-import { Field } from "formik";
+import { FastField } from "formik";
 
 const GameInputSection = styled.section`
   display: grid;
@@ -32,7 +32,7 @@ const GameInput: React.FC<GameInputProps> = React.memo(({ game }) => {
       <PlayersInput game={game} team={1} />
       <PlayersInput game={game} team={2} />
       <GameInputFooter>
-        <Field
+        <FastField
           id="winner"
           name={`games[${game}].winner`}
           component={Select}
@@ -42,23 +42,29 @@ const GameInput: React.FC<GameInputProps> = React.memo(({ game }) => {
             { label: "CLG", value: "CLG" },
           ]}
         />
-        <Field id="time" name={`games[${game}].time`} as={TextInput} label="Time" />
-        <Field
+        <FastField id="time" name={`games[${game}].time`} as={TextInput} label="Time" />
+        <FastField
           id="screenshot"
           name={`games[${game}].screenshot`}
           as={TextInput}
           label="Screenshot"
           placeholder="https//imgur.com/..."
         />
-        <Field
+        <FastField
           id="matchHistory"
           name={`games[${game}].matchHistory`}
           as={TextInput}
           label="Match history"
           placeholder="..."
         />
-        <Field id="breakdown" name={`games[${game}].breakdown`} as={TextInput} label="Breakdown" placeholder="..." />
-        <Field id="context" name={`games[${game}].context`} as={TextInput} label="Context" placeholder="..." />
+        <FastField
+          id="breakdown"
+          name={`games[${game}].breakdown`}
+          as={TextInput}
+          label="Breakdown"
+          placeholder="..."
+        />
+        <FastField id="context" name={`games[${game}].context`} as={TextInput} label="Context" placeholder="..." />
       </GameInputFooter>
     </GameInputSection>
   );

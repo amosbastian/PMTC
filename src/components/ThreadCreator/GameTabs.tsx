@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GameInput from "./GameInput/GameInput";
+import GameInput from "./GameInput";
 import SwipeableViews, { OnChangeIndexCallback } from "react-swipeable-views";
 import GameTab from "./GameTab";
 import ThreadOutput from "./ThreadOutput";

@@ -1,7 +1,7 @@
 import React from "react";
-import Select from "../../Select";
+import Select from "../Select";
 import styled from "styled-components";
-import { Field } from "formik";
+import { FastField } from "formik";
 
 const TeamsInputSection = styled.div`
   display: grid;
@@ -17,7 +17,7 @@ interface TeamsInputProps {
 const TeamsInput: React.FC<TeamsInputProps> = ({ game }) => {
   return (
     <TeamsInputSection>
-      <Field
+      <FastField
         id="team1"
         name={`games[${game}].team1.name`}
         component={Select}
@@ -27,7 +27,7 @@ const TeamsInput: React.FC<TeamsInputProps> = ({ game }) => {
           { label: "CLG", value: "CLG" },
         ]}
       />
-      <Field
+      <FastField
         id="team2"
         name={`games[${game}].team2.name`}
         component={Select}
