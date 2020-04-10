@@ -42,6 +42,7 @@ interface SelectProps extends FieldProps {
   label?: string;
   options: OptionsType<Option>;
   onChange?: (option: Option) => void;
+  value?: Option;
 }
 
 const Select: React.FC<SelectProps> = ({ className, id, label, field, form, options, isMulti = false, onChange }) => {
@@ -59,7 +60,7 @@ const Select: React.FC<SelectProps> = ({ className, id, label, field, form, opti
   const getValue = () => {
     if (options) {
       return isMulti
-        ? options.filter((option) => field.value.indexOf(option.value) >= 0)
+        ? options.filter((option) => field.value?.indexOf(option.value) >= 0)
         : options.find((option) => option.value === field.value);
     } else {
       return isMulti ? [] : ("" as any);

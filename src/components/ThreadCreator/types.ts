@@ -1,5 +1,5 @@
 interface TeamFormValues {
-  name: string;
+  id?: number;
   bans: string[];
   picks: string[];
   player1: string;
@@ -12,8 +12,7 @@ interface TeamFormValues {
 }
 
 interface GameFormValues {
-  team1: TeamFormValues;
-  team2: TeamFormValues;
+  teams: TeamFormValues[];
   winner: string;
   time: string;
   screenshot: string;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import BansInput from "./BansInput";
 import TeamsInput from "./TeamsInput/TeamsInput";
 import PicksInput from "./PicksInput";
-import PlayersInput from "./PlayersInput";
+import PlayersInput from "./PlayersInput/PlayersInput";
 import { FastField } from "formik";
 import { TeamsInputTeamsData } from "./TeamsInput/fragments";
 
@@ -31,8 +31,8 @@ const GameInput: React.FC<GameInputProps> = React.memo(({ game, teams }) => {
       <TeamsInput game={game} teams={teams} />
       <BansInput game={game} />
       <PicksInput game={game} />
+      <PlayersInput game={game} team={0} />
       <PlayersInput game={game} team={1} />
-      <PlayersInput game={game} team={2} />
       <GameInputFooter>
         <FastField
           id="winner"

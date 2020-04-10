@@ -21,8 +21,8 @@ const TeamsInput: React.FC<TeamsInputProps> = ({ game, teams }) => {
 
   return (
     <TeamsInputSection>
-      <FastField id="team1" name={`games[${game}].team1.name`} component={Select} label="Team 1" options={options} />
-      <FastField id="team2" name={`games[${game}].team2.name`} component={Select} label="Team 2" options={options} />
+      <FastField id="team1" name={`games[${game}].teams[0].id`} component={Select} label="Team 1" options={options} />
+      <FastField id="team2" name={`games[${game}].teams[1].id`} component={Select} label="Team 2" options={options} />
     </TeamsInputSection>
   );
 };
