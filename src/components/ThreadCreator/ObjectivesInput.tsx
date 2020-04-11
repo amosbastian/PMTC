@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Label from "../Label";
 
+const Svg = styled.svg`
+  display: inline-block;
+  fill: currentColor;
+  line-height: 1;
+  stroke: currentColor;
+  stroke-width: 0;
+`;
+
 const ObjectivesInputSection = styled.div`
   display: grid;
   padding: 0 1rem;
@@ -16,7 +24,12 @@ const ObjectiveContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   --margin: 0.25rem;
-  margin: calc(var(--margin) * -1) !important;
+  margin-left: calc(var(--margin) * -1) !important;
+  margin-right: calc(var(--margin) * -1) !important;
+  padding: var(--margin) !important;
+  background-color: #f7fafc;
+  border-radius: 0.25rem;
+  text-align: center;
 
   & > * {
     margin: var(--margin);
@@ -31,7 +44,7 @@ const ObjectiveItem = styled.li`
   border-radius: 0.15rem;
   gap: 0.5rem;
 
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 500;
 
   &.team-0 {
@@ -43,13 +56,18 @@ const ObjectiveItem = styled.li`
     background-color: #fff5f5;
     color: #e53e3e;
   }
+
+  & span {
+    line-height: 1;
+  }
 `;
 
 const ObjectiveRemove = styled.div`
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem;
   cursor: pointer;
   transform: background-color 0.2s;
 
@@ -101,16 +119,22 @@ const ObjectivesInput: React.FC<ObjectivesInputProps> = ({ game }) => {
         <button onClick={(event) => onClickHandler(event, "Baron", 1)}>B</button>
         <button onClick={(event) => onClickHandler(event, "Elder", 1)}>E</button>
       </ButtonContainer>
-      <ObjectiveContainer>
-        {objectives.map((objective, index) => (
-          <ObjectiveItem key={index} className={`team-${objective.team}`}>
-            <span>
-              {objective.value} ({index + 1})
-            </span>
-            <ObjectiveRemove onClick={() => onRemoveHandler(objective)}>X</ObjectiveRemove>
-          </ObjectiveItem>
-        ))}
-      </ObjectiveContainer>
+      {objectives.length > 0 && (
+        <ObjectiveContainer>
+          {objectives.map((objective, index) => (
+            <ObjectiveItem key={index} className={`team-${objective.team}`}>
+              <span>
+                {objective.value} ({index + 1})
+              </span>
+              <ObjectiveRemove onClick={() => onRemoveHandler(objective)}>
+                <Svg height="14" width="14" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                  <path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path>
+                </Svg>
+              </ObjectiveRemove>
+            </ObjectiveItem>
+          ))}
+        </ObjectiveContainer>
+      )}
     </ObjectivesInputSection>
   );
 };
