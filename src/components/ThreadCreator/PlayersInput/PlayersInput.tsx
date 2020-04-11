@@ -4,16 +4,37 @@ import styled from "styled-components";
 import TextInput from "../../TextInput";
 import { Field, useFormikContext, FastField } from "formik";
 import { gql } from "apollo-boost";
-import { ThreadCreatorFormValues } from "../types";
+import { ThreadCreatorFormValues, Champion } from "../types";
 import { useQuery } from "@apollo/react-hooks";
 import { PlayersInputPlayerData, PLAYERS_INPUT_PLAYER_FRAGMENT } from "./fragments";
 import { TeamPlayersQuery } from "../../../generated/graphql";
 
+const baseUrl = "http://ddragon.leagueoflegends.com/cdn/";
+
+interface ChampionIconPops {
+  readonly champion: Champion;
+}
+
+const ChampionIcon = styled.div<ChampionIconPops>`
+  height: ${({ champion }) => champion.image.h}px;
+  width: ${({ champion }) => champion.image.w}px;
+  background: url(${({ champion }) => `${baseUrl}${champion.version}/img/sprite/${champion.image.sprite}`});
+  background-position: ${({ champion }) => `-${champion.image.x}px -${champion.image.y}px`};
+  zoom: 0.79;
+  display: flex;
+  align-self: flex-end;
+`;
+
 const PlayersInputSection = styled.section`
+  display: grid;
+  gap: 1rem;
+  padding: 0 1rem;
+`;
+
+const PlayersInputRow = styled.div`
   display: grid;
   grid-template-columns: 1fr max-content 6rem;
   gap: 1rem;
-  padding: 0 1rem;
 `;
 
 const PlayersInputHeader = styled.header`
@@ -40,11 +61,12 @@ const TEAM_PLAYERS = gql`
 `;
 
 interface PlayersInputProps {
+  champions: Champion[];
   game: number;
   team: number;
 }
 
-const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
+const PlayersInput: React.FC<PlayersInputProps> = ({ champions, game, team }) => {
   const { setFieldValue, values } = useFormikContext<ThreadCreatorFormValues>();
 
   const { data } = useQuery<TeamPlayersQuery, TeamPlayersVariables>(TEAM_PLAYERS, {
@@ -74,26 +96,41 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
   const botPlayers = playersByRoleId(players, "BOT").map((player) => ({ label: player.name, value: player }));
   const supPlayers = playersByRoleId(players, "SUP").map((player) => ({ label: player.name, value: player }));
 
+  const getChampion = (player: number) => {
+    const picks = values.games[game].teams[team]?.picks;
+    return picks && picks[player] ? picks[player] : champions[0];
+  };
+
   return (
     <PlayersInputSection>
       <PlayersInputHeader>
         <h3>{values.games[game].teams[team].team.name}</h3>
       </PlayersInputHeader>
-      <Field id="player1" name={`games[${game}].teams[${team}].players[0]`} component={Select} options={topPlayers} />
-      <p>A</p>
-      <FastField id="kda1" name={`games[${game}].teams[${team}].kdas[0]`} as={TextInput} placeholder="0-0-0" />
-      <Field id="player2" name={`games[${game}].teams[${team}].players[1]`} component={Select} options={jngPlayers} />
-      <p>B</p>
-      <FastField id="kda2" name={`games[${game}].teams[${team}].kdas[1]`} as={TextInput} placeholder="0-0-0" />
-      <Field id="player3" name={`games[${game}].teams[${team}].players[2]`} component={Select} options={midPlayers} />
-      <p>C</p>
-      <FastField id="kda3" name={`games[${game}].teams[${team}].kdas[2]`} as={TextInput} placeholder="0-0-0" />
-      <Field id="player4" name={`games[${game}].teams[${team}].players[3]`} component={Select} options={botPlayers} />
-      <p>D</p>
-      <FastField id="kda4" name={`games[${game}].teams[${team}].kdas[3]`} as={TextInput} placeholder="0-0-0" />
-      <Field id="player5" name={`games[${game}].teams[${team}].players[4]`} component={Select} options={supPlayers} />
-      <p>E</p>
-      <FastField id="kda5" name={`games[${game}].teams[${team}].kdas[4]`} as={TextInput} placeholder="0-0-0" />
+      <PlayersInputRow>
+        <Field id="player1" name={`games[${game}].teams[${team}].players[0]`} component={Select} options={topPlayers} />
+        <ChampionIcon champion={getChampion(0)} />
+        <FastField id="kda1" name={`games[${game}].teams[${team}].kdas[0]`} as={TextInput} placeholder="0-0-0" />
+      </PlayersInputRow>
+      <PlayersInputRow>
+        <Field id="player2" name={`games[${game}].teams[${team}].players[1]`} component={Select} options={jngPlayers} />
+        <ChampionIcon champion={getChampion(1)} />
+        <FastField id="kda2" name={`games[${game}].teams[${team}].kdas[1]`} as={TextInput} placeholder="0-0-0" />
+      </PlayersInputRow>
+      <PlayersInputRow>
+        <Field id="player3" name={`games[${game}].teams[${team}].players[2]`} component={Select} options={midPlayers} />
+        <ChampionIcon champion={getChampion(2)} />
+        <FastField id="kda3" name={`games[${game}].teams[${team}].kdas[2]`} as={TextInput} placeholder="0-0-0" />
+      </PlayersInputRow>
+      <PlayersInputRow>
+        <Field id="player4" name={`games[${game}].teams[${team}].players[3]`} component={Select} options={botPlayers} />
+        <ChampionIcon champion={getChampion(3)} />
+        <FastField id="kda4" name={`games[${game}].teams[${team}].kdas[3]`} as={TextInput} placeholder="0-0-0" />
+      </PlayersInputRow>
+      <PlayersInputRow>
+        <Field id="player5" name={`games[${game}].teams[${team}].players[4]`} component={Select} options={supPlayers} />
+        <ChampionIcon champion={getChampion(4)} />
+        <FastField id="kda5" name={`games[${game}].teams[${team}].kdas[4]`} as={TextInput} placeholder="0-0-0" />
+      </PlayersInputRow>
     </PlayersInputSection>
   );
 };

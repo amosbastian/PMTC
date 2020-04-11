@@ -5,7 +5,7 @@ import { EventInputEventData } from "./EventInput/fragments";
 interface TeamFormValues {
   team: TeamsInputTeamsData;
   bans: string[];
-  picks: string[];
+  picks: Champion[];
   players: PlayersInputPlayerData[];
   kdas: string[];
   gold: string;
@@ -42,4 +42,5 @@ export interface Champion {
   id: string;
   name: string;
   image: ChampionImage;
+  version: string;
 }

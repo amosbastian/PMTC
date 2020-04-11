@@ -16,7 +16,7 @@ const TextInputContainer = styled.div`
     width: 100%;
     border-radius: 0.25rem;
     transition: all 0.2s;
-    min-height: 2.25rem;
+    min-height: 2.375rem;
     padding: 0 0.75rem;
     border: 1px solid hsl(0, 0%, 80%);
     font-size: 1rem;
