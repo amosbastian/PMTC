@@ -20,14 +20,14 @@ interface GameFinishedInputProps {
 const GameFinishedInput: React.FC<GameFinishedInputProps> = ({ game, teams }) => {
   const { values } = useFormikContext<ThreadCreatorFormValues>();
 
-  const team1Id = values.games[game].teams[0].id;
-  const team2Id = values.games[game].teams[1].id;
+  const team1Id = values.games[game].teams[0].team.id;
+  const team2Id = values.games[game].teams[1].team.id;
 
   if (!team1Id || !team2Id) return null;
 
   const winnerOptions = teams
     .filter((team) => team.id === team1Id || team.id === team2Id)
-    .map((team) => ({ label: team.name, value: team.id }));
+    .map((team) => ({ label: team.name, value: team }));
 
   return (
     <GameInputFooter>

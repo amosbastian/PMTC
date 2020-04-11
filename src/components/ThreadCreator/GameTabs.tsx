@@ -33,9 +33,9 @@ const GameTabs: React.FC = () => {
   const [view, setView] = useState(0);
   const { values } = useFormikContext<ThreadCreatorFormValues>();
   const { data } = useQuery<TeamsByEventQuery, TeamsByEventQueryVariables>(TEAMS_BY_EVENT, {
-    skip: !values.event,
+    skip: !Boolean(values.event.id),
     variables: {
-      eventId: values.event!,
+      eventId: values.event.id!,
     },
   });
 

@@ -41,20 +41,15 @@ interface SelectProps extends FieldProps {
   isMulti?: boolean;
   label?: string;
   options: OptionsType<Option>;
-  onChange?: (option: Option) => void;
   value?: Option;
 }
 
-const Select: React.FC<SelectProps> = ({ className, id, label, field, form, options, isMulti = false, onChange }) => {
+const Select: React.FC<SelectProps> = ({ className, id, label, field, form, options, isMulti = false }) => {
   const onChangeHandler = (option: ValueType<Option | Option[]>) => {
     form.setFieldValue(
       field.name,
       isMulti ? (option as Option[]).map((item: Option) => item.value) : (option as Option).value,
     );
-
-    if (onChange) {
-      onChange(option as Option);
-    }
   };
 
   const getValue = () => {

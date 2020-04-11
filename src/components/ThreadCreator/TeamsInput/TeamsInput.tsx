@@ -20,17 +20,17 @@ interface TeamsInputProps {
 const TeamsInput: React.FC<TeamsInputProps> = ({ game, teams }) => {
   const { values } = useFormikContext<ThreadCreatorFormValues>();
 
-  const team1Id = values.games[game].teams[0].id;
-  const team2Id = values.games[game].teams[1].id;
+  const team1Id = values.games[game].teams[0].team.id;
+  const team2Id = values.games[game].teams[1].team.id;
 
   const teamOptions = teams
     .filter((team) => team.id !== team1Id && team.id !== team2Id)
-    .map((team) => ({ label: team.name, value: team.id }));
+    .map((team) => ({ label: team.name, value: team }));
 
   return (
     <TeamsInputSection>
-      <Field id="team1" name={`games[${game}].teams[0].id`} component={Select} label="Team 1" options={teamOptions} />
-      <Field id="team2" name={`games[${game}].teams[1].id`} component={Select} label="Team 2" options={teamOptions} />
+      <Field id="team1" name={`games[${game}].teams[0].team`} component={Select} label="Team 1" options={teamOptions} />
+      <Field id="team2" name={`games[${game}].teams[1].team`} component={Select} label="Team 2" options={teamOptions} />
     </TeamsInputSection>
   );
 };

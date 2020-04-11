@@ -8,38 +8,38 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import { EVENT_INPUT_EVENT_FRAGMENT, EventInputEventData } from "./EventInput/fragments";
 
+const team = {
+  team: {
+    id: 0,
+    name: "",
+  },
+  bans: [],
+  picks: [],
+  players: [],
+  kdas: ["", "", "", "", ""],
+  gold: "",
+  towers: "",
+};
+
 const game = {
-  teams: [
-    {
-      id: undefined,
-      bans: [],
-      picks: [],
-      players: [],
-      gold: "",
-      towers: "",
-    },
-    {
-      id: undefined,
-      bans: [],
-      picks: [],
-      players: [],
-      gold: "",
-      towers: "",
-    },
-  ],
+  teams: [team, team],
   winner: "",
   time: "",
   screenshot: "",
   matchHistory: "",
   breakdown: "",
+  context: "",
 };
 
 const initialValues: ThreadCreatorFormValues = {
-  lolEsports: "",
-  gamepedia: "",
-  liquipedia: "",
   context: "",
-  event: undefined,
+  event: {
+    id: 0,
+    name: "",
+    lolEsports: "",
+    liquipedia: "",
+    gamepedia: "",
+  },
   games: [game, game, game, game, game],
 };
 

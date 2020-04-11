@@ -2581,7 +2581,11 @@ export type TeamPlayersQuery = (
 
 export type PlayersInputPlayerFragmentFragment = (
   { __typename?: 'players' }
-  & Pick<Players, 'id' | 'name' | 'roleId' | 'starter'>
+  & Pick<Players, 'id' | 'name' | 'starter'>
+  & { role: (
+    { __typename?: 'roles' }
+    & Pick<Roles, 'id' | 'shortName'>
+  ) }
 );
 
 export type TeamsInputTeamsFragmentFragment = (
@@ -2616,8 +2620,11 @@ export const PlayersInputPlayerFragmentFragmentDoc = gql`
     fragment playersInputPlayerFragment on players {
   id
   name
-  roleId
   starter
+  role {
+    id
+    shortName
+  }
 }
     `;
 export const TeamsInputTeamsFragmentFragmentDoc = gql`

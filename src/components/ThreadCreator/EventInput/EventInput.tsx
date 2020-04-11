@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TextInput from "../../TextInput";
 import Select from "../../Select";
-import { Field, useFormikContext } from "formik";
-import { ThreadCreatorFormValues } from "../types";
+import { Field } from "formik";
 import { EventInputEventData } from "./fragments";
 
 const EventInputContainer = styled.div`
@@ -43,21 +42,14 @@ interface EventInputProps {
 }
 
 const EventInput: React.FC<EventInputProps> = ({ events }) => {
-  const options = events.map((event) => ({ ...event, label: event.name, value: event.id }));
-  const { setFieldValue } = useFormikContext<ThreadCreatorFormValues>();
-
-  const onChange = (option: any) => {
-    setFieldValue("lolEsports", option.lolEsports ?? "");
-    setFieldValue("gamepedia", option.gamepedia ?? "");
-    setFieldValue("liquipedia", option.liquipedia ?? "");
-  };
+  const options = events.map((event) => ({ ...event, label: event.name, value: event }));
 
   return (
     <EventInputContainer>
-      <Field id="event" name="event" component={Select} label="Event" options={options} onChange={onChange} />
-      <Field id="lolEsports" name="lolEsports" as={TextInput} label="LoL eSports" />
-      <Field id="gamepedia" name="gamepedia" as={TextInput} label="Gamepedia" />
-      <Field id="liquipedia" name="liquipedia" as={TextInput} label="Liquipedia" />
+      <Field id="event" name="event" component={Select} label="Event" options={options} />
+      <Field id="lolEsports" name="event.lolEsports" as={TextInput} label="LoL eSports" />
+      <Field id="gamepedia" name="event.gamepedia" as={TextInput} label="Gamepedia" />
+      <Field id="liquipedia" name="event.liquipedia" as={TextInput} label="Liquipedia" />
       <Field id="context" name="context" as={TextInput} label="Context" />
     </EventInputContainer>
   );

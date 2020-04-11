@@ -1,8 +1,13 @@
+import { PlayersInputPlayerData } from "./PlayersInput/fragments";
+import { TeamsInputTeamsData } from "./TeamsInput/fragments";
+import { EventInputEventData } from "./EventInput/fragments";
+
 interface TeamFormValues {
-  id?: number;
+  team: TeamsInputTeamsData;
   bans: string[];
   picks: string[];
-  players: string[];
+  players: PlayersInputPlayerData[];
+  kdas: string[];
   gold: string;
   towers: string;
 }
@@ -14,13 +19,11 @@ interface GameFormValues {
   screenshot: string;
   matchHistory: string;
   breakdown: string;
+  context: string;
 }
 
 export interface ThreadCreatorFormValues {
-  lolEsports: string;
-  gamepedia: string;
-  liquipedia: string;
   context: string;
-  event?: number;
+  event: EventInputEventData;
   games: GameFormValues[];
 }

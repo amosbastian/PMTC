@@ -2,7 +2,7 @@ import React from "react";
 import Select from "../../Select";
 import styled from "styled-components";
 import TextInput from "../../TextInput";
-import { Field, useFormikContext } from "formik";
+import { Field, useFormikContext, FastField } from "formik";
 import { gql } from "apollo-boost";
 import { ThreadCreatorFormValues } from "../types";
 import { useQuery } from "@apollo/react-hooks";
@@ -20,18 +20,8 @@ const PlayersInputHeader = styled.header`
   grid-column: 1 / -1;
 `;
 
-type Role = "top" | "jng" | "mid" | "bot" | "sup";
-
-const roleIdToRoleName: Record<Role, number> = {
-  top: 1,
-  jng: 2,
-  mid: 3,
-  bot: 4,
-  sup: 5,
-};
-
-const playersByRoleId = (players: PlayersInputPlayerData[], role: Role) => {
-  return players.filter((player) => player.roleId === roleIdToRoleName[role]);
+const playersByRoleId = (players: PlayersInputPlayerData[], role: string) => {
+  return players.filter((player) => player.role.shortName === role);
 };
 
 interface TeamPlayersVariables {
@@ -58,52 +48,52 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
   const { setFieldValue, values } = useFormikContext<ThreadCreatorFormValues>();
 
   const { data } = useQuery<TeamPlayersQuery, TeamPlayersVariables>(TEAM_PLAYERS, {
-    skip: values.games[game].teams[team].id === undefined,
+    skip: values.games[game].teams[team].team.id === 0,
     variables: {
-      teamId: values.games[game].teams[team].id!,
+      teamId: values.games[game].teams[team].team.id!,
     },
     onCompleted: (queryData) => {
       const players = queryData.playerTeam
         .map(({ player }) => player)
         .sort((playerA, playerB) => Number(playerA.starter) - Number(playerB.starter))
         .reverse();
-      setFieldValue(`games[${game}].teams[${team}].players[0]`, playersByRoleId(players, "top")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].players[1]`, playersByRoleId(players, "jng")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].players[2]`, playersByRoleId(players, "mid")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].players[3]`, playersByRoleId(players, "bot")[0].name);
-      setFieldValue(`games[${game}].teams[${team}].players[4]`, playersByRoleId(players, "sup")[0].name);
+      setFieldValue(`games[${game}].teams[${team}].players[0]`, playersByRoleId(players, "TOP")[0]);
+      setFieldValue(`games[${game}].teams[${team}].players[1]`, playersByRoleId(players, "JNG")[0]);
+      setFieldValue(`games[${game}].teams[${team}].players[2]`, playersByRoleId(players, "MID")[0]);
+      setFieldValue(`games[${game}].teams[${team}].players[3]`, playersByRoleId(players, "BOT")[0]);
+      setFieldValue(`games[${game}].teams[${team}].players[4]`, playersByRoleId(players, "SUP")[0]);
     },
   });
 
   if (!data) return null;
 
   const players = data.playerTeam.map(({ player }) => player);
-  const topPlayers = playersByRoleId(players, "top").map((player) => ({ label: player.name, value: player.name }));
-  const jngPlayers = playersByRoleId(players, "jng").map((player) => ({ label: player.name, value: player.name }));
-  const midPlayers = playersByRoleId(players, "mid").map((player) => ({ label: player.name, value: player.name }));
-  const botPlayers = playersByRoleId(players, "bot").map((player) => ({ label: player.name, value: player.name }));
-  const supPlayers = playersByRoleId(players, "sup").map((player) => ({ label: player.name, value: player.name }));
+  const topPlayers = playersByRoleId(players, "TOP").map((player) => ({ label: player.name, value: player }));
+  const jngPlayers = playersByRoleId(players, "JNG").map((player) => ({ label: player.name, value: player }));
+  const midPlayers = playersByRoleId(players, "MID").map((player) => ({ label: player.name, value: player }));
+  const botPlayers = playersByRoleId(players, "BOT").map((player) => ({ label: player.name, value: player }));
+  const supPlayers = playersByRoleId(players, "SUP").map((player) => ({ label: player.name, value: player }));
 
   return (
     <PlayersInputSection>
       <PlayersInputHeader>
-        <h3>{`Team ${team + 1}`}</h3>
+        <h3>{values.games[game].teams[team].team.name}</h3>
       </PlayersInputHeader>
       <Field id="player1" name={`games[${game}].teams[${team}].players[0]`} component={Select} options={topPlayers} />
       <p>A</p>
-      <TextInput id="time" placeholder="0-0-0" />
+      <FastField id="kda1" name={`games[${game}].teams[${team}].kdas[0]`} as={TextInput} placeholder="0-0-0" />
       <Field id="player2" name={`games[${game}].teams[${team}].players[1]`} component={Select} options={jngPlayers} />
       <p>B</p>
-      <TextInput id="time" placeholder="0-0-0" />
+      <FastField id="kda2" name={`games[${game}].teams[${team}].kdas[1]`} as={TextInput} placeholder="0-0-0" />
       <Field id="player3" name={`games[${game}].teams[${team}].players[2]`} component={Select} options={midPlayers} />
       <p>C</p>
-      <TextInput id="time" placeholder="0-0-0" />
+      <FastField id="kda3" name={`games[${game}].teams[${team}].kdas[2]`} as={TextInput} placeholder="0-0-0" />
       <Field id="player4" name={`games[${game}].teams[${team}].players[3]`} component={Select} options={botPlayers} />
       <p>D</p>
-      <TextInput id="time" placeholder="0-0-0" />
+      <FastField id="kda4" name={`games[${game}].teams[${team}].kdas[3]`} as={TextInput} placeholder="0-0-0" />
       <Field id="player5" name={`games[${game}].teams[${team}].players[4]`} component={Select} options={supPlayers} />
       <p>E</p>
-      <TextInput id="time" placeholder="0-0-0" />
+      <FastField id="kda5" name={`games[${game}].teams[${team}].kdas[4]`} as={TextInput} placeholder="0-0-0" />
     </PlayersInputSection>
   );
 };
