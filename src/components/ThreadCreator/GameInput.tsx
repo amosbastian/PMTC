@@ -42,7 +42,7 @@ const GameInput: React.FC<GameInputProps> = React.memo(({ game, teams }) => {
     <GameInputSection>
       <TeamsInput game={game} teams={teams} />
       <BansInput champions={champions} game={game} />
-      <PicksInput game={game} />
+      <PicksInput champions={champions} game={game} />
       <PlayersInput game={game} team={0} />
       <PlayersInput game={game} team={1} />
       <GameFinishedInput game={game} teams={teams} />
