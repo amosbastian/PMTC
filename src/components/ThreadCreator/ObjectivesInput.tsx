@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Label from "../Label";
+import { useFormikContext } from "formik";
+import { ThreadCreatorFormValues } from "./types";
 
 const Svg = styled.svg`
   display: inline-block;
@@ -86,15 +88,24 @@ interface ObjectivesInputProps {
 }
 
 const ObjectivesInput: React.FC<ObjectivesInputProps> = ({ game }) => {
+  const { setFieldValue } = useFormikContext<ThreadCreatorFormValues>();
   const [objectives, setObjectives] = useState<Objective[]>([]);
 
   const onClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, objective: string, team: number) => {
     event.preventDefault();
-    setObjectives((prevState) => [...prevState, { value: objective, team }]);
+    setObjectives((prevState) => {
+      const newObjectives = [...prevState, { value: objective, team }];
+      setFieldValue(`games[${game}].objectives`, newObjectives);
+      return newObjectives;
+    });
   };
 
   const onRemoveHandler = (removedObjective: Objective) => {
-    setObjectives((prevState) => prevState.filter((objective) => objective !== removedObjective));
+    setObjectives((prevState) => {
+      const filteredObjectives = prevState.filter((objective) => objective !== removedObjective);
+      setFieldValue(`games[${game}].objectives`, filteredObjectives);
+      return filteredObjectives;
+    });
   };
 
   return (

@@ -17,7 +17,6 @@ const team = {
   pickOrder: [],
   picks: [],
   players: [],
-  objectives: [],
   kdas: [],
   gold: "",
   towers: "",
@@ -25,6 +24,7 @@ const team = {
 
 const game = {
   teams: [team, team],
+  objectives: [],
   winner: "",
   time: "",
   screenshot: "",
