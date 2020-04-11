@@ -9,6 +9,7 @@ import GameFinishedInput from "./GameFinishedInput";
 import fetch from "isomorphic-unfetch";
 import { Champion, ThreadCreatorFormValues } from "./types";
 import { useFormikContext } from "formik";
+import ObjectivesInput from "./ObjectivesInput";
 
 const GameInputSection = styled.section`
   display: grid;
@@ -58,6 +59,7 @@ const GameInput: React.FC<GameInputProps> = React.memo(({ game, teams }) => {
       <TeamsInput game={game} teams={teams} />
       <BansInput champions={champions} game={game} />
       <PicksInput champions={champions} game={game} />
+      <ObjectivesInput game={game} />
       {picksAndBansComplete && (
         <>
           <PlayersInput game={game} team={0} />

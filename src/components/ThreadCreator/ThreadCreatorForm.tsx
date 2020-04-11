@@ -17,6 +17,7 @@ const team = {
   pickOrder: [],
   picks: [],
   players: [],
+  objectives: [],
   kdas: [],
   gold: "",
   towers: "",

@@ -7,6 +7,7 @@ interface TeamFormValues {
   pickOrder: string[];
   picks: string[];
   players: string[];
+  objectives: string[];
   kdas: string[];
   gold: string;
   towers: string;
