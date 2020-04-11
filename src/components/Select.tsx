@@ -5,17 +5,10 @@ import styled from "styled-components";
 import ReactSelect from "react-select";
 import { FieldProps } from "formik";
 import { OptionsType, ValueType } from "react-select/src/types";
+import Label from "./Label";
 
 const TextInputContainer = styled.div`
   width: 100%;
-
-  .label {
-    font-size: 0.875rem;
-    color: #374151;
-    font-weight: 500;
-    line-height: 1.25rem;
-    margin-bottom: 0.45rem;
-  }
 `;
 
 const customStyles = {
@@ -75,7 +68,7 @@ const Select: React.FC<SelectProps> = ({
   return (
     <TextInputContainer className={className} id={id}>
       <label>
-        <p className="label">{label}</p>
+        <Label>{label}</Label>
         <ReactSelect
           styles={customStyles}
           name={field.name}
