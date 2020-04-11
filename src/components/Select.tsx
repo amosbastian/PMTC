@@ -38,13 +38,23 @@ interface Option {
 interface SelectProps extends FieldProps {
   className?: string;
   id?: string;
+  isDisabled?: boolean;
   isMulti?: boolean;
   label?: string;
   options: OptionsType<Option>;
   value?: Option;
 }
 
-const Select: React.FC<SelectProps> = ({ className, id, label, field, form, options, isMulti = false }) => {
+const Select: React.FC<SelectProps> = ({
+  className,
+  id,
+  label,
+  field,
+  form,
+  options,
+  isMulti = false,
+  isDisabled = false,
+}) => {
   const onChangeHandler = (option: ValueType<Option | Option[]>) => {
     form.setFieldValue(
       field.name,
@@ -73,6 +83,7 @@ const Select: React.FC<SelectProps> = ({ className, id, label, field, form, opti
           onChange={onChangeHandler}
           options={options}
           isMulti={isMulti}
+          isDisabled={isDisabled}
         />
       </label>
     </TextInputContainer>

@@ -16,7 +16,7 @@ const team = {
   bans: [],
   picks: [],
   players: [],
-  kdas: ["", "", "", "", ""],
+  kdas: [],
   gold: "",
   towers: "",
 };

@@ -1,12 +1,11 @@
-import { PlayersInputPlayerData } from "./PlayersInput/fragments";
 import { TeamsInputTeamsData } from "./TeamsInput/fragments";
 import { EventInputEventData } from "./EventInput/fragments";
 
 interface TeamFormValues {
   team: TeamsInputTeamsData;
   bans: string[];
-  picks: Champion[];
-  players: PlayersInputPlayerData[];
+  picks: string[];
+  players: string[];
   kdas: string[];
   gold: string;
   towers: string;
@@ -27,20 +26,7 @@ export interface ThreadCreatorFormValues {
   event: EventInputEventData;
   games: GameFormValues[];
 }
-
-export interface ChampionImage {
-  full: string;
-  sprite: string;
-  group: string;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-}
-
 export interface Champion {
   id: string;
   name: string;
-  image: ChampionImage;
-  version: string;
 }
