@@ -48,14 +48,14 @@ const Select: React.FC<SelectProps> = ({ className, id, label, field, form, opti
   const onChangeHandler = (option: ValueType<Option | Option[]>) => {
     form.setFieldValue(
       field.name,
-      isMulti ? (option as Option[]).map((item: Option) => item.value) : (option as Option).value,
+      isMulti ? (option as Option[])?.map((item: Option) => item.value) : (option as Option).value,
     );
   };
 
   const getValue = () => {
     if (options) {
       return isMulti
-        ? options.filter((option) => field.value?.indexOf(option.value) >= 0)
+        ? field.value?.forEach((value: any) => options.find((option) => option.value === value))
         : options.find((option) => option.value === field.value);
     } else {
       return isMulti ? [] : ("" as any);

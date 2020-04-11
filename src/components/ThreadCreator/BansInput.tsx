@@ -2,6 +2,7 @@ import React from "react";
 import Select from "../Select";
 import styled from "styled-components";
 import { FastField } from "formik";
+import { Champion } from "./types";
 
 const BansInputSection = styled.div`
   display: grid;
@@ -10,32 +11,28 @@ const BansInputSection = styled.div`
 `;
 
 interface BansInputProps {
+  champions: Champion[];
   game: number;
 }
 
-const BansInput: React.FC<BansInputProps> = ({ game }) => {
+const BansInput: React.FC<BansInputProps> = ({ champions, game }) => {
+  const championOptions = champions.map((champion) => ({ label: champion.name, value: champion.id }));
   return (
     <BansInputSection>
       <FastField
         id="bans1"
-        name={`games[${game}].team1.bans`}
+        name={`games[${game}].teams[0].bans`}
         component={Select}
         label="Bans team 1"
-        options={[
-          { label: "TSM", value: "TSM" },
-          { label: "CLG", value: "CLG" },
-        ]}
+        options={championOptions}
         isMulti
       />
       <FastField
         id="bans2"
-        name={`games[${game}].team2.bans`}
+        name={`games[${game}].teams[1].bans`}
         component={Select}
         label="Bans team 2"
-        options={[
-          { label: "TSM", value: "TSM" },
-          { label: "CLG", value: "CLG" },
-        ]}
+        options={championOptions}
         isMulti
       />
     </BansInputSection>
