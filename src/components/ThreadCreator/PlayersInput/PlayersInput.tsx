@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "../../Select";
 import styled from "styled-components";
 import TextInput from "../../TextInput";
@@ -93,6 +93,10 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
     },
   });
 
+  useEffect(() => {
+    setFieldValue(`games[${game}].teams[${team}].pickOrder`, pickOrder.items);
+  }, [pickOrder, game, setFieldValue, team]);
+
   if (!data) return null;
 
   const players = data.playerTeam.map(({ player }) => player);
@@ -106,6 +110,7 @@ const PlayersInput: React.FC<PlayersInputProps> = ({ game, team }) => {
     setPickOrder(({ items }) => ({
       items: arrayMove(items, oldIndex, newIndex),
     }));
+    setFieldValue(`games[${game}].teams[${team}].pickOrder`, pickOrder.items);
   };
 
   return (

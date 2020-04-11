@@ -14,6 +14,7 @@ const team = {
     name: "",
   },
   bans: [],
+  pickOrder: [],
   picks: [],
   players: [],
   kdas: [],

@@ -4,6 +4,7 @@ import { EventInputEventData } from "./EventInput/fragments";
 interface TeamFormValues {
   team: TeamsInputTeamsData;
   bans: string[];
+  pickOrder: string[];
   picks: string[];
   players: string[];
   kdas: string[];
