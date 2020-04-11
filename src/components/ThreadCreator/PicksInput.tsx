@@ -16,7 +16,7 @@ interface PicksInputProps {
 }
 
 const PicksInput: React.FC<PicksInputProps> = ({ champions, game }) => {
-  const championOptions = champions.map((champion) => ({ label: champion.name, value: champion }));
+  const championOptions = champions.map((champion) => ({ label: champion.name, value: champion.id }));
   return (
     <PicksInputSection>
       <FastField
