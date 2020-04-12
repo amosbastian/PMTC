@@ -1,8 +1,10 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 
 import palette from "./palette";
+import typography from "./typography";
 
 const theme = createMuiTheme({
+  typography,
   palette,
   zIndex: {
     appBar: 1200,
@@ -10,4 +12,4 @@ const theme = createMuiTheme({
   },
 });
 
-export default responsiveFontSizes(theme);
+export default theme;

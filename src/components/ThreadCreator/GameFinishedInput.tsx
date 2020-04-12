@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FastField, useFormikContext } from "formik";
-import Select from "../Select";
-import TextInput from "../TextInput";
 import { ThreadCreatorFormValues } from "./types";
 import { TeamsInputTeamsData } from "./TeamsInput/fragments";
 
@@ -80,36 +78,32 @@ const GameFinishedInput: React.FC<GameFinishedInputProps> = ({ game, teams }) =>
 
   return (
     <GameInputFooter>
-      <FastField id="winner" name={`games[${game}].winner`} component={Select} label="Winner" options={winnerOptions} />
-      <FastField id="time" name={`games[${game}].time`} as={TextInput} label="Time (minutes)" />
+      <FastField id="winner" name={`games[${game}].winner`} label="Winner" options={winnerOptions} />
+      <FastField id="time" name={`games[${game}].time`} label="Time (minutes)" />
       <FastField
         id="gold1"
         name={`games[${game}].teams[0].gold`}
-        as={TextInput}
         label={`Gold (${values.games[game].teams[0].team.name})`}
       />
       <FastField
         id="towers1"
         name={`games[${game}].teams[0].towers`}
-        as={TextInput}
         label={`Towers (${values.games[game].teams[0].team.name})`}
       />
       <FastField
         id="gold2"
         name={`games[${game}].teams[1].gold`}
-        as={TextInput}
         label={`Gold (${values.games[game].teams[1].team.name})`}
       />
       <FastField
         id="towers2"
         name={`games[${game}].teams[1].towers`}
-        as={TextInput}
         label={`Towers (${values.games[game].teams[1].team.name})`}
       />
-      <FastField id="screenshot" name={`games[${game}].screenshot`} as={TextInput} label="Screenshot" />
-      <FastField id="matchHistory" name={`games[${game}].matchHistory`} as={TextInput} label="Match history" />
-      <FastField id="breakdown" name={`games[${game}].breakdown`} as={TextInput} label="Breakdown" />
-      <FastField id="context" name={`games[${game}].context`} as={TextInput} label="Context (picks)" />
+      <FastField id="screenshot" name={`games[${game}].screenshot`} label="Screenshot" />
+      <FastField id="matchHistory" name={`games[${game}].matchHistory`} label="Match history" />
+      <FastField id="breakdown" name={`games[${game}].breakdown`} label="Breakdown" />
+      <FastField id="context" name={`games[${game}].context`} label="Context (picks)" />
     </GameInputFooter>
   );
 };

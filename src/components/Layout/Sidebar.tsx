@@ -11,7 +11,7 @@ import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 const StyledDrawer = styled(Drawer)`
   .MuiPaper-root {
     width: 240px;
-    ${({ theme }) => theme.breakpoints.up("lg")} {
+    ${({ theme }) => theme.breakpoints.up("md")} {
       margin-top: 64px;
       height: calc(100% - 64px);
     }

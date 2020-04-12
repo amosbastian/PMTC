@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme: any) => ({
   active: {
     color: theme.palette.primary.main,
     fontWeight: theme.typography.fontWeightMedium,
-    "& $icon": {
-      color: theme.palette.primary.main,
-    },
   },
 }));
 
@@ -54,19 +51,17 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ navigationItems }
   return (
     <List component="nav" aria-label="navigation">
       {navigationItems.map(({ icon, name, to }) => (
-        <>
-          <ListItem className={classes.item} disableGutters>
-            <Button
-              activeClassName={classes.active}
-              className={classes.button}
-              component={CustomRouterLink}
-              to={to}
-              startIcon={icon}
-            >
-              {name}
-            </Button>
-          </ListItem>
-        </>
+        <ListItem key={name} className={classes.item} disableGutters>
+          <Button
+            activeClassName={classes.active}
+            className={classes.button}
+            component={CustomRouterLink}
+            to={to}
+            startIcon={icon}
+          >
+            {name}
+          </Button>
+        </ListItem>
       ))}
     </List>
   );

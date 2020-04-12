@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Label from "../Label";
 import { useFormikContext } from "formik";
 import { ThreadCreatorFormValues } from "./types";
 
@@ -110,7 +109,6 @@ const ObjectivesInput: React.FC<ObjectivesInputProps> = ({ game }) => {
 
   return (
     <ObjectivesInputSection>
-      <Label>Objectives team 1</Label>
       <ButtonContainer>
         <button onClick={(event) => onClickHandler(event, "Cloud", 0)}>C</button>
         <button onClick={(event) => onClickHandler(event, "Ocean", 0)}>O</button>
@@ -120,7 +118,6 @@ const ObjectivesInput: React.FC<ObjectivesInputProps> = ({ game }) => {
         <button onClick={(event) => onClickHandler(event, "Baron", 0)}>B</button>
         <button onClick={(event) => onClickHandler(event, "Elder", 0)}>E</button>
       </ButtonContainer>
-      <Label>Objectives team 2</Label>
       <ButtonContainer>
         <button onClick={(event) => onClickHandler(event, "Cloud", 1)}>C</button>
         <button onClick={(event) => onClickHandler(event, "Ocean", 1)}>O</button>

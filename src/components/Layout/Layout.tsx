@@ -29,7 +29,7 @@ const Layout: React.FC = ({ children }) => {
 
   const theme = useTheme();
 
-  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"), {
     defaultMatches: true,
   });
 

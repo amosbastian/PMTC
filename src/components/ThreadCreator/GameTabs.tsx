@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import GameInput from "./GameInput";
 import SwipeableViews, { OnChangeIndexCallback } from "react-swipeable-views";
-import GameTab from "./GameTab";
-import ThreadOutput from "./ThreadOutput";
 import { useFormikContext } from "formik";
 import { ThreadCreatorFormValues } from "./types";
 import { gql } from "apollo-boost";
@@ -52,21 +50,13 @@ const GameTabs: React.FC = () => {
   };
 
   return (
-    <>
-      <Tabs>
-        {TABS.map((name, index) => (
-          <GameTab key={name} active={index === view} name={name} onClick={() => onClickHandler(index)} />
-        ))}
-      </Tabs>
-      <SwipeableViews index={view} onChangeIndex={onChangeHandler}>
-        <GameInput game={0} teams={teams} />
-        <GameInput game={1} teams={teams} />
-        <GameInput game={2} teams={teams} />
-        <GameInput game={3} teams={teams} />
-        <GameInput game={4} teams={teams} />
-        <ThreadOutput />
-      </SwipeableViews>
-    </>
+    <SwipeableViews index={view} onChangeIndex={onChangeHandler}>
+      <GameInput game={0} teams={teams} />
+      <GameInput game={1} teams={teams} />
+      <GameInput game={2} teams={teams} />
+      <GameInput game={3} teams={teams} />
+      <GameInput game={4} teams={teams} />
+    </SwipeableViews>
   );
 };
 
