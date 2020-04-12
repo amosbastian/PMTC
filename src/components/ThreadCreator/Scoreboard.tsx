@@ -8,8 +8,13 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const StyledCardContent = styled(CardContent)`
   display: grid;
-  grid-template-columns: 1fr 5rem 5rem;
-  gap: 1rem;
+  gap: 0.5rem;
+  grid-template-columns: 2fr 1fr 1fr;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    gap: 1rem;
+    grid-template-columns: 1fr 4rem 5rem;
+  }
 `;
 
 interface ScoreboardRowProps {
