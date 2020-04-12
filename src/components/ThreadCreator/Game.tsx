@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PickAndBanPhase from "./PickAndBanPhase";
 import Objectives from "./Objectives";
+import Scoreboard from "./Scoreboard";
 
 const GameContainer = styled.div`
   display: grid;
@@ -23,6 +24,8 @@ const Game: React.FC<GameProps> = React.memo(({ game }) => {
     <GameContainer>
       <PickAndBanPhase />
       <Objectives />
+      <Scoreboard team={1} />
+      <Scoreboard team={2} />
     </GameContainer>
   );
 });
