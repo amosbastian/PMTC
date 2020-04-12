@@ -49,6 +49,12 @@ const Form = styled.form`
   display: grid;
   gap: 1rem;
   max-width: 100vw;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    max-width: 1024px;
+    margin: auto;
+  }
 `;
 
 interface TestQueryVariables {

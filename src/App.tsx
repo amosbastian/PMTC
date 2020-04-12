@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Events from "./pages/Events";
 import Schedule from "./pages/Schedule";
 import Teams from "./pages/Teams";
-import Layout from "./components/Layout";
 import ThreadCreator from "./pages/ThreadCreator";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (

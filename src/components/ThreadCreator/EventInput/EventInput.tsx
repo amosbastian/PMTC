@@ -35,6 +35,13 @@ const EventInputContainer = styled.div`
   #context {
     grid-area: context;
   }
+
+  @media (min-width: 1024px) {
+    grid-template-areas:
+      "event lolEsports"
+      "gamepedia liquipedia"
+      "context context";
+  }
 `;
 
 interface EventInputProps {

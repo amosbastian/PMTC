@@ -37,6 +37,7 @@ const DesktopMenuContainer = styled(Container)`
   grid-template-columns: repeat(auto-fit, minmax(0, max-content));
   align-items: center;
   height: 4rem;
+  padding: 0 2rem;
 
   @media only screen and (max-width: 600px) {
     display: none;
@@ -62,6 +63,7 @@ const MobileMenuContainer = styled(Container)`
   justify-content: flex-end;
   align-items: center;
   height: 4rem;
+  padding: 0 1rem;
 
   @media only screen and (min-width: 600px) {
     display: none;

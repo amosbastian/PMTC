@@ -8,6 +8,10 @@ const BansInputSection = styled.div`
   display: grid;
   gap: 1rem;
   padding: 0 1rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 interface BansInputProps {
