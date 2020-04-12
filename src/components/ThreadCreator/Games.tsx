@@ -7,7 +7,12 @@ import Game from "./Game";
 
 const GamesContainer = styled.div`
   display: grid;
+  gap: 1rem;
   max-width: 100%;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    gap: 2rem;
+  }
 `;
 
 const Games: React.FC = () => {
