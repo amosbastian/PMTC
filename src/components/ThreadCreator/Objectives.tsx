@@ -18,7 +18,7 @@ const StyledCardContent = styled(CardContent)`
 const ObjectivesButtonGroup = styled(ButtonGroup)`
   height: 2.375rem;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 `;
 
 const ObjectivesContainer = styled(Paper)`
@@ -49,26 +49,38 @@ const ObjectiveChip = styled(Chip)`
   }
 `;
 
+const DRAKES_FOR_ELDER = 4;
+const drakes = ["infernal", "ocean", "cloud", "mountain"];
+
 interface Objective {
-  label: string;
+  id: string;
   team: number;
+  isDrake: boolean;
 }
 
 interface ObjectiveButtonsProps {
+  elderHasSpawned: boolean;
   onClick: (objective: string, team: number) => void;
   team: number;
 }
 
-const ObjectiveButtons: React.FC<ObjectiveButtonsProps> = ({ onClick, team }) => {
+const ObjectiveButtons: React.FC<ObjectiveButtonsProps> = ({ elderHasSpawned, onClick, team }) => {
+  if (elderHasSpawned) {
+    return (
+      <ObjectivesButtonGroup size="small" aria-label="team 1 objectives">
+        <Button onClick={() => onClick("elder", team)}>E</Button>
+        <Button onClick={() => onClick("baron", team)}>B</Button>
+      </ObjectivesButtonGroup>
+    );
+  }
   return (
     <ObjectivesButtonGroup size="small" aria-label="team 1 objectives">
-      <Button onClick={() => onClick("Infernal", team)}>I</Button>
-      <Button onClick={() => onClick("Ocean", team)}>O</Button>
-      <Button onClick={() => onClick("Mountain", team)}>M</Button>
-      <Button onClick={() => onClick("Cloud", team)}>C</Button>
-      <Button onClick={() => onClick("Herald", team)}>H</Button>
-      <Button onClick={() => onClick("Baron", team)}>B</Button>
-      <Button onClick={() => onClick("Elder", team)}>E</Button>
+      <Button onClick={() => onClick("infernal", team)}>I</Button>
+      <Button onClick={() => onClick("ocean", team)}>O</Button>
+      <Button onClick={() => onClick("mountain", team)}>M</Button>
+      <Button onClick={() => onClick("cloud", team)}>C</Button>
+      <Button onClick={() => onClick("herald", team)}>H</Button>
+      <Button onClick={() => onClick("baron", team)}>B</Button>
     </ObjectivesButtonGroup>
   );
 };
@@ -80,24 +92,36 @@ const Objectives: React.FC = () => {
     setObjectives((curentObjectives) => curentObjectives.filter((objective) => objective !== objectiveToDelete));
   };
 
-  const handleObjectiveClick = (objective: string, team: number) => {
-    setObjectives((previousObjectives) => [...previousObjectives, { label: objective, team }]);
+  const handleObjectiveClick = (takenObjective: string, team: number) => {
+    setObjectives((previousObjectives) => [
+      ...previousObjectives,
+      { id: takenObjective, team, isDrake: drakes.includes(takenObjective) },
+    ]);
   };
+
+  const hasElderSpawned = () => {
+    const team1Drakes = objectives.filter((objective) => objective.team === 1 && objective.isDrake);
+    const team2Drakes = objectives.filter((objective) => objective.team === 2 && objective.isDrake);
+
+    return team1Drakes.length >= DRAKES_FOR_ELDER || team2Drakes.length >= DRAKES_FOR_ELDER;
+  };
+
+  const elderHasSpawned = hasElderSpawned();
 
   return (
     <Card>
       <CardHeader title="Objectives" />
       <StyledCardContent>
-        <ObjectiveButtons team={1} onClick={handleObjectiveClick} />
-        <ObjectiveButtons team={2} onClick={handleObjectiveClick} />
+        <ObjectiveButtons elderHasSpawned={elderHasSpawned} team={1} onClick={handleObjectiveClick} />
+        <ObjectiveButtons elderHasSpawned={elderHasSpawned} team={2} onClick={handleObjectiveClick} />
         <ObjectivesContainer component="ul" variant="outlined">
           {objectives.map((data, index) => {
-            const { label, team } = data;
+            const { id, team } = data;
             return (
               <ObjectiveChip
-                key={`${label}-${index}`}
+                key={`${id}-${index}`}
                 className={`team${team}`}
-                label={label}
+                label={id}
                 onDelete={handleDelete(data)}
                 size="small"
               />
