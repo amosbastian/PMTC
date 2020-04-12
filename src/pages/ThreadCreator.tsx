@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EventSelector from "../components/ThreadCreator/EventSelector";
-import PickAndBanPhase from "../components/ThreadCreator/PickAndBanPhase";
+import Games from "../components/ThreadCreator/Games";
 
 const ThreadCreatorSection = styled.section`
   display: grid;
@@ -9,7 +9,7 @@ const ThreadCreatorSection = styled.section`
   padding: 1rem;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
-    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
     padding: 2rem;
   }
 `;
@@ -18,7 +18,7 @@ const ThreadCreator: React.FC = () => {
   return (
     <ThreadCreatorSection>
       <EventSelector />
-      <PickAndBanPhase />
+      <Games />
     </ThreadCreatorSection>
   );
 };
