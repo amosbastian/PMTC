@@ -1,29 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Events from "./pages/Events";
-import Schedule from "./pages/Schedule";
-import Teams from "./pages/Teams";
-import ThreadCreator from "./pages/ThreadCreator";
+import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Routes from "./Routes";
 
 function App() {
   return (
     <Router>
       <Layout>
-        <Switch>
-          <Route path="/events">
-            <Events />
-          </Route>
-          <Route path="/teams">
-            <Teams />
-          </Route>
-          <Route path="/schedule">
-            <Schedule />
-          </Route>
-          <Route path="/">
-            <ThreadCreator />
-          </Route>
-        </Switch>
+        <Routes />
       </Layout>
     </Router>
   );
