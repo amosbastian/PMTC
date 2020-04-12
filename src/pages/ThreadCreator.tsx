@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EventSelector from "../components/ThreadCreator/EventSelector";
+import PickAndBanPhase from "../components/ThreadCreator/PickAndBanPhase";
 
 const ThreadCreatorSection = styled.section`
   display: grid;
@@ -17,6 +18,7 @@ const ThreadCreator: React.FC = () => {
   return (
     <ThreadCreatorSection>
       <EventSelector />
+      <PickAndBanPhase />
     </ThreadCreatorSection>
   );
 };
