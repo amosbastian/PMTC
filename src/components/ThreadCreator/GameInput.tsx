@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { TeamsInputTeamsData } from "./TeamsInput/fragments";
 import fetch from "isomorphic-unfetch";
-import { Champion } from "./types";
 
 const GameInputSection = styled.section`
   display: grid;
   gap: 1rem;
 `;
-interface GameInputProps {
-  game: number;
-  teams: TeamsInputTeamsData[];
-}
 
-const GameInput: React.FC<GameInputProps> = React.memo(({ game, teams }) => {
-  const [champions, setChampions] = useState<undefined | Champion[]>();
+const GameInput: React.FC = React.memo(() => {
+  const [champions, setChampions] = useState<undefined | any[]>();
 
   useEffect(() => {
     const fetchChampions = async () => {
