@@ -51,11 +51,15 @@ const StyledCardContent = styled(CardContent)`
   }
 `;
 
-const PickAndBanPhase: React.FC = () => {
+interface PickAndBanPhaseProps {
+  className?: string;
+}
+
+const PickAndBanPhase: React.FC<PickAndBanPhaseProps> = ({ className }) => {
   const teams: { value: string; label: string }[] = [];
   const noTeams = teams.length === 0;
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader title="Pick & ban phase" />
       <StyledCardContent>
         <Autocomplete

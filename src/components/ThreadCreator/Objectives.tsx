@@ -85,7 +85,11 @@ const ObjectiveButtons: React.FC<ObjectiveButtonsProps> = ({ elderHasSpawned, on
   );
 };
 
-const Objectives: React.FC = () => {
+interface ObjectivesProps {
+  className?: string;
+}
+
+const Objectives: React.FC<ObjectivesProps> = ({ className }) => {
   const [objectives, setObjectives] = useState<Objective[]>([]);
 
   const handleDelete = (objectiveToDelete: Objective) => () => {
@@ -109,7 +113,7 @@ const Objectives: React.FC = () => {
   const elderHasSpawned = hasElderSpawned();
 
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader title="Objectives" />
       <StyledCardContent>
         <ObjectiveButtons elderHasSpawned={elderHasSpawned} team={1} onClick={handleObjectiveClick} />

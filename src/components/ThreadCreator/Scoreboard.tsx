@@ -34,15 +34,16 @@ const ScoreboardRow: React.FC<ScoreboardRowProps> = ({ disabled, options }) => {
 };
 
 interface ScoreboardProps {
+  className?: string;
   team: number;
 }
 
-const Scoreboard: React.FC<ScoreboardProps> = ({ team }) => {
+const Scoreboard: React.FC<ScoreboardProps> = ({ className, team }) => {
   const events: { value: string; label: string }[] = [];
   const disabled = events.length === 0;
 
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader title={`Team ${team}`} />
       <StyledCardContent>
         <ScoreboardRow disabled={disabled} options={events} />
