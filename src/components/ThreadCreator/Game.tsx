@@ -5,7 +5,13 @@ import Objectives from "./Objectives";
 
 const GameContainer = styled.div`
   display: grid;
+  gap: 1rem;
   max-width: 100%;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
 `;
 
 interface GameProps {

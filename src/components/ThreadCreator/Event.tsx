@@ -9,9 +9,13 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 const StyledCardContent = styled(CardContent)`
   display: grid;
   gap: 1rem;
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
-const EventSelector: React.FC = () => {
+const Event: React.FC = () => {
   const events: { value: string; label: string }[] = [];
   const noEvents = events.length === 0;
 
@@ -23,7 +27,7 @@ const EventSelector: React.FC = () => {
           options={events}
           getOptionLabel={(option) => option.label}
           filterSelectedOptions
-          renderInput={(params) => <TextField {...params} variant="outlined" label="Team 1" size="small" />}
+          renderInput={(params) => <TextField {...params} variant="outlined" label="Event" size="small" />}
           disabled={noEvents}
         />
         <TextField fullWidth size="small" variant="outlined" disabled={noEvents} label="Lolesports" />
@@ -34,4 +38,4 @@ const EventSelector: React.FC = () => {
   );
 };
 
-export default EventSelector;
+export default Event;

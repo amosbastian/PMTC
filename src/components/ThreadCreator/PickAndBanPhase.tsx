@@ -9,6 +9,46 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 const StyledCardContent = styled(CardContent)`
   display: grid;
   gap: 1rem;
+  grid-template-areas:
+    "team1"
+    "team2"
+    "bans1"
+    "bans2"
+    "picks1"
+    "picks2";
+
+  .team1 {
+    grid-area: team1;
+  }
+
+  .team2 {
+    grid-area: team2;
+  }
+
+  .bans1 {
+    grid-area: bans1;
+  }
+
+  .bans2 {
+    grid-area: bans2;
+  }
+
+  .picks1 {
+    grid-area: picks1;
+  }
+
+  .picks2 {
+    grid-area: picks2;
+  }
+
+  ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-areas:
+      "team1 team2"
+      "bans1 bans1"
+      "bans2 bans2"
+      "picks1 picks1"
+      "picks2 picks2";
+  }
 `;
 
 const PickAndBanPhase: React.FC = () => {
@@ -19,6 +59,7 @@ const PickAndBanPhase: React.FC = () => {
       <CardHeader title="Pick & ban phase" />
       <StyledCardContent>
         <Autocomplete
+          className="team1"
           options={teams}
           getOptionLabel={(option) => option.label}
           filterSelectedOptions
@@ -26,6 +67,7 @@ const PickAndBanPhase: React.FC = () => {
           disabled={noTeams}
         />
         <Autocomplete
+          className="team2"
           options={teams}
           getOptionLabel={(option) => option.label}
           filterSelectedOptions
@@ -33,6 +75,7 @@ const PickAndBanPhase: React.FC = () => {
           disabled={noTeams}
         />
         <Autocomplete
+          className="bans1"
           multiple
           options={teams}
           getOptionLabel={(option) => option.label}
@@ -41,6 +84,7 @@ const PickAndBanPhase: React.FC = () => {
           disabled={noTeams}
         />
         <Autocomplete
+          className="bans2"
           multiple
           options={teams}
           getOptionLabel={(option) => option.label}
@@ -49,6 +93,7 @@ const PickAndBanPhase: React.FC = () => {
           disabled={noTeams}
         />
         <Autocomplete
+          className="picks1"
           multiple
           options={teams}
           getOptionLabel={(option) => option.label}
@@ -57,6 +102,7 @@ const PickAndBanPhase: React.FC = () => {
           disabled={noTeams}
         />
         <Autocomplete
+          className="picks2"
           multiple
           options={teams}
           getOptionLabel={(option) => option.label}

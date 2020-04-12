@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import EventSelector from "../components/ThreadCreator/EventSelector";
+import Event from "../components/ThreadCreator/Event";
 import Games from "../components/ThreadCreator/Games";
 
 const ThreadCreatorSection = styled.section`
@@ -17,7 +17,7 @@ const ThreadCreatorSection = styled.section`
 const ThreadCreator: React.FC = () => {
   return (
     <ThreadCreatorSection>
-      <EventSelector />
+      <Event />
       <Games />
     </ThreadCreatorSection>
   );
