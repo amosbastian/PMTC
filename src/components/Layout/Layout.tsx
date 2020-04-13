@@ -3,7 +3,8 @@ import styled from "styled-components";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-import { useTheme, useMediaQuery } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 interface LayoutContainerProps {
   isDesktop: boolean;

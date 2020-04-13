@@ -4,6 +4,7 @@ import Events from "./pages/Events";
 import Teams from "./pages/Teams";
 import Schedule from "./pages/Schedule";
 import ThreadCreator from "./pages/ThreadCreator";
+import Players from "./pages/Players";
 
 const Routes: React.FC = () => {
   return (
@@ -16,6 +17,9 @@ const Routes: React.FC = () => {
       </Route>
       <Route path="/schedule">
         <Schedule />
+      </Route>
+      <Route path="/players">
+        <Players />
       </Route>
       <Route path="/">
         <ThreadCreator />
