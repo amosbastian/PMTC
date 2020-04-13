@@ -56,6 +56,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ navigationItems }
             activeClassName={classes.active}
             className={classes.button}
             component={CustomRouterLink}
+            exact
             to={to}
             startIcon={icon}
           >

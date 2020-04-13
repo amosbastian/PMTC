@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ onSidebarOpen }) => {
       <Toolbar>
         <Typography variant="h6">PMTC</Typography>
         <div style={{ flexGrow: 1 }} />
-        <Hidden lgUp>
+        <Hidden mdUp>
           <IconButton aria-label="open sidebar" color="inherit" onClick={onSidebarOpen}>
             <MenuIcon />
           </IconButton>
