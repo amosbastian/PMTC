@@ -4,6 +4,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews, { OnChangeIndexCallback } from "react-swipeable-views";
 import Game from "./Game";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
 
 const GamesContainer = styled.div`
   display: grid;
@@ -17,6 +19,7 @@ const GamesContainer = styled.div`
 
 const Games: React.FC = () => {
   const [index, setIndex] = useState(0);
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<{}>, value: any) => {
     setIndex(value);
@@ -26,9 +29,13 @@ const Games: React.FC = () => {
     setIndex(changeIndex);
   };
 
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
+    defaultMatches: true,
+  });
+
   return (
     <GamesContainer>
-      <Tabs value={index} onChange={handleChange} variant="scrollable">
+      <Tabs value={index} onChange={handleChange} variant={isDesktop ? "fullWidth" : "scrollable"}>
         <Tab label="Game 1" />
         <Tab label="Game 2" />
         <Tab label="Game 3" />

@@ -13,6 +13,10 @@ const StyledCardContent = styled(CardContent)`
   ${({ theme }) => theme.breakpoints.up("md")} {
     grid-template-columns: 1fr 1fr;
   }
+
+  ${({ theme }) => theme.breakpoints.up("lg")} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
 
 interface ResultProps {
@@ -25,7 +29,7 @@ const Result: React.FC<ResultProps> = ({ className }) => {
 
   return (
     <Card className={className}>
-      <CardHeader title="Event" />
+      <CardHeader title="Result" />
       <StyledCardContent>
         <Autocomplete
           options={events}

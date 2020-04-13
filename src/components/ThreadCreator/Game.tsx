@@ -38,6 +38,7 @@ const GameContainer = styled.div`
   max-width: 100%;
 
   ${({ theme }) => theme.breakpoints.up("md")} {
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "result result"
       "pickAndBanPhase objectives"
