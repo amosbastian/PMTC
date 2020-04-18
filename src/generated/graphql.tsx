@@ -846,11 +846,11 @@ export enum Order_By {
 export type Players = {
    __typename?: 'players';
   id: Scalars['Int'];
+  isStarter: Scalars['Boolean'];
   name: Scalars['String'];
   /** An object relationship */
   role: Roles;
   roleId: Scalars['Int'];
-  starter: Scalars['Boolean'];
   /** An object relationship */
   team?: Maybe<Teams>;
   teamId?: Maybe<Scalars['Int']>;
@@ -928,10 +928,10 @@ export type Players_Bool_Exp = {
   _not?: Maybe<Players_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Players_Bool_Exp>>>;
   id?: Maybe<Int_Comparison_Exp>;
+  isStarter?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   role?: Maybe<Roles_Bool_Exp>;
   roleId?: Maybe<Int_Comparison_Exp>;
-  starter?: Maybe<Boolean_Comparison_Exp>;
   team?: Maybe<Teams_Bool_Exp>;
   teamId?: Maybe<Int_Comparison_Exp>;
 };
@@ -952,10 +952,10 @@ export type Players_Inc_Input = {
 /** input type for inserting data into table "players" */
 export type Players_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
+  isStarter?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   role?: Maybe<Roles_Obj_Rel_Insert_Input>;
   roleId?: Maybe<Scalars['Int']>;
-  starter?: Maybe<Scalars['Boolean']>;
   team?: Maybe<Teams_Obj_Rel_Insert_Input>;
   teamId?: Maybe<Scalars['Int']>;
 };
@@ -1019,10 +1019,10 @@ export type Players_On_Conflict = {
 /** ordering options when selecting data from "players" */
 export type Players_Order_By = {
   id?: Maybe<Order_By>;
+  isStarter?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   role?: Maybe<Roles_Order_By>;
   roleId?: Maybe<Order_By>;
-  starter?: Maybe<Order_By>;
   team?: Maybe<Teams_Order_By>;
   teamId?: Maybe<Order_By>;
 };
@@ -1032,11 +1032,11 @@ export enum Players_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsStarter = 'isStarter',
+  /** column name */
   Name = 'name',
   /** column name */
   RoleId = 'roleId',
-  /** column name */
-  Starter = 'starter',
   /** column name */
   TeamId = 'teamId'
 }
@@ -1044,9 +1044,9 @@ export enum Players_Select_Column {
 /** input type for updating data in table "players" */
 export type Players_Set_Input = {
   id?: Maybe<Scalars['Int']>;
+  isStarter?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   roleId?: Maybe<Scalars['Int']>;
-  starter?: Maybe<Scalars['Boolean']>;
   teamId?: Maybe<Scalars['Int']>;
 };
 
@@ -1115,11 +1115,11 @@ export enum Players_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsStarter = 'isStarter',
+  /** column name */
   Name = 'name',
   /** column name */
   RoleId = 'roleId',
-  /** column name */
-  Starter = 'starter',
   /** column name */
   TeamId = 'teamId'
 }
