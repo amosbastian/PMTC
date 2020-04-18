@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
@@ -11,6 +12,12 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
 import { FetchPlayersQuery } from "../../generated/graphql";
+import { Player } from "./PlayerForm";
+
+const StyledPaper = styled(Paper)`
+  max-width: 100%;
+  overflow-x: hidden;
+`;
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -99,10 +106,11 @@ interface TableData {
 }
 
 interface PlayersTableProps {
+  onEditPlayer: (player: Player) => void;
   players?: FetchPlayersQuery["players"];
 }
 
-const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
+const PlayersTable: React.FC<PlayersTableProps> = ({ onEditPlayer, players = [] }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = React.useState<Order>("asc");
@@ -126,6 +134,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
   const tablePlayers = players.map((player) => {
     const teams = player.teams.map(({ team }) => team.name);
     return {
+      id: player.id,
       name: player.name,
       teams: teams.join(", "),
       role: player.role.name,
@@ -134,8 +143,13 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, players.length - page * rowsPerPage);
 
+  const editPlayer = (playerId: number) => {
+    const player = players.find((player) => player.id === playerId);
+    onEditPlayer(player!);
+  };
+
   return (
-    <Paper>
+    <StyledPaper>
       <TableContainer>
         <Table aria-label="simple table">
           <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
@@ -143,14 +157,14 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
             {stableSort(tablePlayers, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((player) => (
-                <TableRow key={player.name} hover>
+                <TableRow key={player.id} hover>
                   <TableCell component="th" scope="row">
                     {player.name}
                   </TableCell>
                   <TableCell>{player.teams}</TableCell>
                   <TableCell>{player.role}</TableCell>
                   <TableCell padding="none">
-                    <IconButton size="small">
+                    <IconButton size="small" onClick={() => editPlayer(player.id)}>
                       <EditIcon />
                     </IconButton>
                   </TableCell>
@@ -173,7 +187,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </Paper>
+    </StyledPaper>
   );
 };
 
