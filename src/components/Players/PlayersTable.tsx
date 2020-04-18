@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import EditIcon from "@material-ui/icons/Edit";
+import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -6,8 +8,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Paper from "@material-ui/core/Paper";
 import { FetchPlayersQuery } from "../../generated/graphql";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -58,10 +60,9 @@ interface EnhancedTableHeadProps {
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TableData) => void;
   order: Order;
   orderBy: string;
-  rowCount: number;
 }
 
-const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({ order, orderBy, rowCount, onRequestSort }) => {
+const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({ order, orderBy, onRequestSort }) => {
   const createSortHandler = (property: keyof TableData) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
@@ -85,6 +86,7 @@ const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({ order, orderBy, r
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell padding="none" />
       </TableRow>
     </TableHead>
   );
@@ -136,12 +138,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
     <Paper>
       <TableContainer>
         <Table aria-label="simple table">
-          <EnhancedTableHead
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-            rowCount={tablePlayers.length}
-          />
+          <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
           <TableBody>
             {stableSort(tablePlayers, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -152,11 +149,16 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ players = [] }) => {
                   </TableCell>
                   <TableCell>{player.teams}</TableCell>
                   <TableCell>{player.role}</TableCell>
+                  <TableCell padding="none">
+                    <IconButton size="small">
+                      <EditIcon />
+                    </IconButton>
+                  </TableCell>
                 </TableRow>
               ))}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={3} />
+                <TableCell colSpan={4} />
               </TableRow>
             )}
           </TableBody>
