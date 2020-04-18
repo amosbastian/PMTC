@@ -31,9 +31,10 @@ const StyledCardActions = styled(CardActions)`
 
 interface PlayerFormProps {
   player?: Player;
+  handleClose: () => void;
 }
 
-const PlayerForm: React.FC<PlayerFormProps> = ({ player }) => {
+const PlayerForm: React.FC<PlayerFormProps> = ({ handleClose, player }) => {
   const teams: { value: string; label: string }[] = [];
   const noTeams = teams.length === 0;
 
@@ -58,6 +59,7 @@ const PlayerForm: React.FC<PlayerFormProps> = ({ player }) => {
         />
       </StyledCardContent>
       <StyledCardActions>
+        <Button onClick={handleClose}>Cancel</Button>
         <Button color="primary" variant="contained">
           Save
         </Button>
