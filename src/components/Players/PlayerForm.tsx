@@ -10,6 +10,7 @@ import { FetchPlayersQuery, FetchTeamsAndRolesQuery } from "../../generated/grap
 import { Button } from "@material-ui/core";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
+import { useForm, Controller } from "react-hook-form";
 
 export type Player = FetchPlayersQuery["players"][0];
 
@@ -50,38 +51,58 @@ interface PlayerFormProps {
 }
 
 const PlayerForm: React.FC<PlayerFormProps> = ({ handleClose, player }) => {
+  const methods = useForm();
+  const { handleSubmit, control, reset } = methods;
   const { data, loading, error } = useQuery<FetchTeamsAndRolesQuery>(FETCH_TEAMS_AND_ROLES);
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
 
-  const teams = data?.teams;
-  const roles = data?.roles;
+  const teams = data?.teams.map((team) => ({ id: team.id, label: team.name }));
+  const roles = data?.roles.map((role) => ({ id: role.id, label: role.name }));
+
+  const playerTeam = {
+    id: player?.team?.id ?? "",
+    label: player?.team?.name ?? "",
+  };
+
+  const playerRole = {
+    id: player?.role.id ?? "",
+    label: player?.role.name ?? "",
+  };
 
   return (
-    <Card component="form">
+    <Card component="form" onSubmit={handleSubmit(onSubmit)}>
       <CardHeader title={player ? `Edit ${player.name}` : "Add player"} />
       <StyledCardContent>
         <Autocomplete
           options={teams ?? []}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option?.label ?? ""}
           filterSelectedOptions
           renderInput={(params) => <TextField {...params} variant="outlined" label="Team" />}
           disabled={!data}
-          value={player?.team}
+          defaultValue={player ? playerTeam : null}
           size="small"
         />
-        <TextField fullWidth variant="outlined" label="Name" disabled={!data} value={player?.name} size="small" />
+        <Controller
+          as={<TextField fullWidth variant="outlined" label="Name" disabled={!data} size="small" />}
+          defaultValue={player?.name ?? ""}
+          name="name"
+          control={control}
+        />
         <Autocomplete
           options={roles ?? []}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option?.label ?? ""}
           filterSelectedOptions
           renderInput={(params) => <TextField {...params} variant="outlined" label="Role" />}
           disabled={!data}
-          value={player?.role}
+          defaultValue={player ? playerRole : null}
           size="small"
         />
       </StyledCardContent>
       <StyledCardActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button color="primary" variant="contained">
+        <Button type="submit" color="primary" variant="contained">
           Save
         </Button>
       </StyledCardActions>
