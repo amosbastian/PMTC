@@ -26,7 +26,7 @@ const FETCH_PLAYERS = gql`
       name
       role {
         id
-        name
+        shortName
       }
       teams {
         team {
@@ -46,12 +46,13 @@ const Players: React.FC = () => {
   const players = data?.players;
   console.log(player);
 
-  const handleOpen = () => {
-    setFormOpen(true);
-  };
-
   const handleClose = () => {
     setFormOpen(false);
+  };
+
+  const onAddPlayer = () => {
+    setPlayer(undefined);
+    setFormOpen(true);
   };
 
   const onEditPlayer = (player: Player) => {
@@ -61,8 +62,8 @@ const Players: React.FC = () => {
 
   return (
     <PlayersSection>
-      <PlayersToolbar handleOpen={handleOpen} />
-      <Collapse in={formOpen}>
+      <PlayersToolbar onAddPlayer={onAddPlayer} />
+      <Collapse in={formOpen} unmountOnExit>
         <PlayerForm player={player} handleClose={handleClose} />
       </Collapse>
       <PlayersTable players={players} onEditPlayer={onEditPlayer} />

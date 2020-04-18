@@ -2542,6 +2542,20 @@ export type Teams_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type FetchTeamsAndRolesQueryVariables = {};
+
+
+export type FetchTeamsAndRolesQuery = (
+  { __typename?: 'query_root' }
+  & { teams: Array<(
+    { __typename?: 'teams' }
+    & Pick<Teams, 'id' | 'name'>
+  )>, roles: Array<(
+    { __typename?: 'roles' }
+    & Pick<Roles, 'id' | 'shortName'>
+  )> }
+);
+
 export type FetchPlayersQueryVariables = {};
 
 
@@ -2552,7 +2566,7 @@ export type FetchPlayersQuery = (
     & Pick<Players, 'id' | 'name'>
     & { role: (
       { __typename?: 'roles' }
-      & Pick<Roles, 'id' | 'name'>
+      & Pick<Roles, 'id' | 'shortName'>
     ), teams: Array<(
       { __typename?: 'playerTeam' }
       & { team: (
@@ -2564,6 +2578,43 @@ export type FetchPlayersQuery = (
 );
 
 
+export const FetchTeamsAndRolesDocument = gql`
+    query fetchTeamsAndRoles {
+  teams {
+    id
+    name
+  }
+  roles {
+    id
+    shortName
+  }
+}
+    `;
+
+/**
+ * __useFetchTeamsAndRolesQuery__
+ *
+ * To run a query within a React component, call `useFetchTeamsAndRolesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchTeamsAndRolesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchTeamsAndRolesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFetchTeamsAndRolesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<FetchTeamsAndRolesQuery, FetchTeamsAndRolesQueryVariables>) {
+        return ApolloReactHooks.useQuery<FetchTeamsAndRolesQuery, FetchTeamsAndRolesQueryVariables>(FetchTeamsAndRolesDocument, baseOptions);
+      }
+export function useFetchTeamsAndRolesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<FetchTeamsAndRolesQuery, FetchTeamsAndRolesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<FetchTeamsAndRolesQuery, FetchTeamsAndRolesQueryVariables>(FetchTeamsAndRolesDocument, baseOptions);
+        }
+export type FetchTeamsAndRolesQueryHookResult = ReturnType<typeof useFetchTeamsAndRolesQuery>;
+export type FetchTeamsAndRolesLazyQueryHookResult = ReturnType<typeof useFetchTeamsAndRolesLazyQuery>;
+export type FetchTeamsAndRolesQueryResult = ApolloReactCommon.QueryResult<FetchTeamsAndRolesQuery, FetchTeamsAndRolesQueryVariables>;
 export const FetchPlayersDocument = gql`
     query fetchPlayers {
   players {
@@ -2571,7 +2622,7 @@ export const FetchPlayersDocument = gql`
     name
     role {
       id
-      name
+      shortName
     }
     teams {
       team {

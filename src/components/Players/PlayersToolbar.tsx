@@ -12,10 +12,10 @@ const Toolbar = styled.div`
 `;
 
 interface PlayersToolbarProps {
-  handleOpen: () => void;
+  onAddPlayer: () => void;
 }
 
-const PlayersToolbar: React.FC<PlayersToolbarProps> = ({ handleOpen }) => {
+const PlayersToolbar: React.FC<PlayersToolbarProps> = ({ onAddPlayer }) => {
   const theme = useTheme();
 
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"), {
@@ -25,7 +25,7 @@ const PlayersToolbar: React.FC<PlayersToolbarProps> = ({ handleOpen }) => {
   return (
     <Toolbar>
       <SearchInput placeholder="Search players" size="small" variant="outlined" />
-      <Button color="primary" variant="contained" onClick={handleOpen}>
+      <Button color="primary" variant="contained" onClick={onAddPlayer}>
         Add{isDesktop && " player"}
       </Button>
     </Toolbar>

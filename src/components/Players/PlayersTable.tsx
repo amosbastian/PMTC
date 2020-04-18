@@ -137,7 +137,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ onEditPlayer, players = [] 
       id: player.id,
       name: player.name,
       teams: teams.join(", "),
-      role: player.role.name,
+      role: player.role.shortName,
     };
   });
 
