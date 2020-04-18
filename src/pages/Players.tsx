@@ -26,13 +26,11 @@ const FETCH_PLAYERS = gql`
       name
       role {
         id
-        shortName
+        name
       }
-      teams {
-        team {
-          id
-          name
-        }
+      team {
+        id
+        name
       }
     }
   }

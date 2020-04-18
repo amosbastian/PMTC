@@ -52,25 +52,25 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof TableData;
+  id: keyof PlayerTableData;
   label: string;
   numeric: boolean;
 }
 
 const headCells: HeadCell[] = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
-  { id: "teams", numeric: false, disablePadding: false, label: "Team(s)" },
+  { id: "team", numeric: false, disablePadding: false, label: "Team" },
   { id: "role", numeric: false, disablePadding: false, label: "Role" },
 ];
 
 interface EnhancedTableHeadProps {
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TableData) => void;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof PlayerTableData) => void;
   order: Order;
   orderBy: string;
 }
 
 const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({ order, orderBy, onRequestSort }) => {
-  const createSortHandler = (property: keyof TableData) => (event: React.MouseEvent<unknown>) => {
+  const createSortHandler = (property: keyof PlayerTableData) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -99,9 +99,9 @@ const EnhancedTableHead: React.FC<EnhancedTableHeadProps> = ({ order, orderBy, o
   );
 };
 
-interface TableData {
+interface PlayerTableData {
   name: string;
-  teams: string;
+  team: string;
   role: string;
 }
 
@@ -114,7 +114,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ onEditPlayer, players = [] 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof TableData>("name");
+  const [orderBy, setOrderBy] = React.useState<keyof PlayerTableData>("name");
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -125,19 +125,18 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ onEditPlayer, players = [] 
     setPage(0);
   };
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof TableData) => {
+  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof PlayerTableData) => {
     const isAscending = orderBy === property && order === "asc";
     setOrder(isAscending ? "desc" : "asc");
     setOrderBy(property);
   };
 
   const tablePlayers = players.map((player) => {
-    const teams = player.teams.map(({ team }) => team.name);
     return {
       id: player.id,
       name: player.name,
-      teams: teams.join(", "),
-      role: player.role.shortName,
+      team: player.team?.name ?? "",
+      role: player.role.name,
     };
   });
 
@@ -161,7 +160,7 @@ const PlayersTable: React.FC<PlayersTableProps> = ({ onEditPlayer, players = [] 
                   <TableCell component="th" scope="row">
                     {player.name}
                   </TableCell>
-                  <TableCell>{player.teams}</TableCell>
+                  <TableCell>{player.team}</TableCell>
                   <TableCell>{player.role}</TableCell>
                   <TableCell padding="none">
                     <IconButton size="small" onClick={() => editPlayer(player.id)}>

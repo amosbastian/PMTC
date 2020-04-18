@@ -6,8 +6,10 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import { FetchPlayersQuery } from "../../generated/graphql";
+import { FetchPlayersQuery, FetchTeamsAndRolesQuery } from "../../generated/graphql";
 import { Button } from "@material-ui/core";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 
 export type Player = FetchPlayersQuery["players"][0];
 
@@ -29,33 +31,52 @@ const StyledCardActions = styled(CardActions)`
   justify-content: flex-end;
 `;
 
+const FETCH_TEAMS_AND_ROLES = gql`
+  query fetchTeamsAndRoles {
+    teams {
+      id
+      name
+    }
+    roles {
+      id
+      name
+    }
+  }
+`;
+
 interface PlayerFormProps {
   player?: Player;
   handleClose: () => void;
 }
 
 const PlayerForm: React.FC<PlayerFormProps> = ({ handleClose, player }) => {
-  const teams: { value: string; label: string }[] = [];
-  const noTeams = teams.length === 0;
+  const { data, loading, error } = useQuery<FetchTeamsAndRolesQuery>(FETCH_TEAMS_AND_ROLES);
+
+  const teams = data?.teams;
+  const roles = data?.roles;
 
   return (
     <Card component="form">
-      <CardHeader title="Editing player" />
+      <CardHeader title={player ? `Edit ${player.name}` : "Add player"} />
       <StyledCardContent>
         <Autocomplete
-          options={teams}
-          getOptionLabel={(option) => option.label}
+          options={teams ?? []}
+          getOptionLabel={(option) => option.name}
           filterSelectedOptions
-          renderInput={(params) => <TextField {...params} variant="outlined" label="Team" size="small" />}
-          disabled={noTeams}
+          renderInput={(params) => <TextField {...params} variant="outlined" label="Team" />}
+          disabled={!data}
+          value={player?.team}
+          size="small"
         />
-        <TextField fullWidth size="small" variant="outlined" label="Name" />
+        <TextField fullWidth variant="outlined" label="Name" disabled={!data} value={player?.name} size="small" />
         <Autocomplete
-          options={teams}
-          getOptionLabel={(option) => option.label}
+          options={roles ?? []}
+          getOptionLabel={(option) => option.name}
           filterSelectedOptions
-          renderInput={(params) => <TextField {...params} variant="outlined" label="Role" size="small" />}
-          disabled={noTeams}
+          renderInput={(params) => <TextField {...params} variant="outlined" label="Role" />}
+          disabled={!data}
+          value={player?.role}
+          size="small"
         />
       </StyledCardContent>
       <StyledCardActions>
